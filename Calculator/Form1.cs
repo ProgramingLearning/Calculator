@@ -311,5 +311,10 @@ namespace Calculator
             double.TryParse(valueToConvert, out double result);
             return result;
         }
+
+        private void btn_IsPrime_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

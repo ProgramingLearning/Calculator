@@ -50,6 +50,7 @@ namespace Calculator
             this.btn_7 = new System.Windows.Forms.Button();
             this.lbl_title = new System.Windows.Forms.Label();
             this.textbox_result = new System.Windows.Forms.TextBox();
+            this.ButtonPrim = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_4
@@ -66,7 +67,7 @@ namespace Calculator
             // btn_clear
             // 
             this.btn_clear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_clear.Location = new System.Drawing.Point(252, 187);
+            this.btn_clear.Location = new System.Drawing.Point(331, 187);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(45, 45);
             this.btn_clear.TabIndex = 18;
@@ -143,7 +144,7 @@ namespace Calculator
             // btn_result
             // 
             this.btn_result.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_result.Location = new System.Drawing.Point(253, 247);
+            this.btn_result.Location = new System.Drawing.Point(331, 245);
             this.btn_result.Name = "btn_result";
             this.btn_result.Size = new System.Drawing.Size(45, 105);
             this.btn_result.TabIndex = 15;
@@ -231,7 +232,7 @@ namespace Calculator
             // btn_CE
             // 
             this.btn_CE.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_CE.Location = new System.Drawing.Point(253, 126);
+            this.btn_CE.Location = new System.Drawing.Point(331, 126);
             this.btn_CE.Name = "btn_CE";
             this.btn_CE.Size = new System.Drawing.Size(45, 45);
             this.btn_CE.TabIndex = 25;
@@ -271,11 +272,23 @@ namespace Calculator
             this.textbox_result.Text = "0";
             this.textbox_result.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // ButtonPrim
+            // 
+            this.ButtonPrim.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonPrim.Location = new System.Drawing.Point(253, 246);
+            this.ButtonPrim.Name = "ButtonPrim";
+            this.ButtonPrim.Size = new System.Drawing.Size(72, 45);
+            this.ButtonPrim.TabIndex = 31;
+            this.ButtonPrim.Text = "IsPrime";
+            this.ButtonPrim.UseVisualStyleBackColor = true;
+            this.ButtonPrim.Click += new System.EventHandler(this.btn_IsPrime_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 409);
+            this.ClientSize = new System.Drawing.Size(482, 409);
+            this.Controls.Add(this.ButtonPrim);
             this.Controls.Add(this.textbox_result);
             this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.btn_9);
@@ -328,6 +341,7 @@ namespace Calculator
         private System.Windows.Forms.Button btn_7;
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.TextBox textbox_result;
+        private System.Windows.Forms.Button ButtonPrim;
     }
 }
 
