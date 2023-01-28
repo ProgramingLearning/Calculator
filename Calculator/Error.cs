@@ -9,7 +9,7 @@ namespace Calculator
         None = 0,
         DivideBy0 = 1,
         NoOperationSelected = 2,
-        Error3 = 3,
+        IsNotAnInteger = 3,
         Error4 = 4
     }
 }
