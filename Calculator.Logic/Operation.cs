@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.Logic
 {
     public enum Operation
     {
