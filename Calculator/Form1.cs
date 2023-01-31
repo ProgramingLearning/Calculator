@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Calculator.Logic;
 
 namespace Calculator
 {
     public partial class Form1 : Form
     {
-        double firstTerm;
-        double secondTerm;
+        List<string> terms = new List<string>();
+        string firstTerm;
+        string secondTerm;
         double resultValue;
-        Operation operationPerformed = Operation.None;
-        bool isOperationPerformed = false;
+        Operation operationButtonPressed = Operation.None;
+        bool isOperationButtonPressed = false;
+        bool isResultButtonthelastbuttonpressed = false;
+        ICalculatorLogic calculatorLogic;
 
-        public Form1()
+        public Form1(ICalculatorLogic calculatorLogic)
         {
+            this.calculatorLogic = calculatorLogic;
             InitializeComponent();
         }
 
@@ -34,12 +33,11 @@ namespace Calculator
             {
                 textbox_result.Clear();
             }
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
-
             textbox_result.Text = $"{textbox_result.Text}0";
         }
 
@@ -48,10 +46,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}1";
         }
@@ -61,10 +59,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}2";
         }
@@ -74,10 +72,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}3";
         }
@@ -87,10 +85,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}4";
         }
@@ -100,10 +98,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}5";
         }
@@ -113,10 +111,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}6";
         }
@@ -126,10 +124,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}7";
         }
@@ -139,10 +137,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}8";
         }
@@ -152,10 +150,10 @@ namespace Calculator
             if (textbox_result.Text == "0")
                 textbox_result.Clear();
 
-            if (isOperationPerformed)
+            if (isOperationButtonPressed)
             {
                 textbox_result.Clear();
-                isOperationPerformed = false;
+                isOperationButtonPressed = false;
             }
             textbox_result.Text = $"{textbox_result.Text}9";
         }
@@ -177,10 +175,12 @@ namespace Calculator
         {
             textbox_result.Text = "0";
             lbl_title.Text = "Calculator";
-            firstTerm = 0;
-            secondTerm = 0;
-            isOperationPerformed = false;
-            operationPerformed = Operation.None;
+            firstTerm = 0.ToString();
+            secondTerm = 0.ToString();
+            terms = new List<string>();
+            isOperationButtonPressed = false;
+            operationButtonPressed = Operation.None;
+            isResultButtonthelastbuttonpressed = false;
         }
 
         private void btn_CE_Click(object sender, EventArgs e)
@@ -190,43 +190,66 @@ namespace Calculator
 
         private void btn_sum_click(object sender, EventArgs e)
         {
-            operationPerformed = Operation.Sum;
-            isOperationPerformed = true;
-            firstTerm = ConvertDouble(textbox_result.Text);
-
+            operationButtonPressed = Operation.Sum;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
             lbl_title.Text = "+";
+            isResultButtonthelastbuttonpressed = false;
         }
 
         private void btn_sub_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = ConvertDouble(textbox_result.Text);
-            operationPerformed = Operation.Subtract;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            operationButtonPressed = Operation.Subtract;
             lbl_title.Text = "-";
+            isResultButtonthelastbuttonpressed = false;
         }
 
         private void btn_mul_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = ConvertDouble(textbox_result.Text);
-            operationPerformed = Operation.Multiply;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            operationButtonPressed = Operation.Multiply;
             lbl_title.Text = "*";
+            isResultButtonthelastbuttonpressed = false;
         }
 
         private void btn_div_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = ConvertDouble(textbox_result.Text);
-            operationPerformed = Operation.Divide;
+            isOperationButtonPressed = true;
+            isResultButtonthelastbuttonpressed = false;
+            terms.Add(textbox_result.Text);
+            operationButtonPressed = Operation.Divide;
             lbl_title.Text = "/";
         }
 
         private void btn_result_Click(object sender, EventArgs e)
         {
-            lbl_title.Text = "Result";
+            if (isResultButtonthelastbuttonpressed)
+            {
+                firstTerm = textbox_result.Text;
+                TryCatch();
+            }
+            else
+            {
+                lbl_title.Text = "Result";
+                if (operationButtonPressed == Operation.Divide)
+                {
+                    terms.Add(textbox_result.Text);
+                    ProcessResult(calculatorLogic.DoStuff(operationButtonPressed, terms.ToArray()));
+                }
+                else
+                {
+                    secondTerm = textbox_result.Text;
+                    TryCatch();
+                }
+                isResultButtonthelastbuttonpressed = true;
+            }
+        }
 
-            secondTerm = ConvertDouble(textbox_result.Text);
-
+        private void TryCatch()
+        {
             try
             {
                 PerformOperation();
@@ -253,7 +276,10 @@ namespace Calculator
                         lbl_title.Text = "Select operation: +, -, * or /";
                     }
                     break;
-                case Error.Error3:
+                case Error.IsNotAnInteger:
+                    {
+                        lbl_title.Text = "The number is not an Integer";
+                    }
                     break;
                 case Error.Error4:
                     break;
@@ -264,7 +290,7 @@ namespace Calculator
 
         private void PerformOperation()
         {
-            switch (operationPerformed)
+            switch (operationButtonPressed)
             {
                 case Operation.None:
                     {
@@ -272,27 +298,109 @@ namespace Calculator
                     }
                 case Operation.Sum:
                     {
-                        resultValue = firstTerm + secondTerm;
+                        resultValue = ConvertToDouble(firstTerm) + ConvertToDouble(secondTerm);
                         textbox_result.Text = resultValue.ToString();
                         break;
                     }
                 case Operation.Subtract:
                     {
-                        resultValue = firstTerm - secondTerm;
+                        resultValue = ConvertToDouble(firstTerm) - ConvertToDouble(secondTerm);
                         textbox_result.Text = resultValue.ToString();
                         break;
                     }
                 case Operation.Multiply:
                     {
-                        resultValue = firstTerm * secondTerm;
+                        resultValue = ConvertToDouble(firstTerm) * ConvertToDouble(secondTerm);
                         textbox_result.Text = resultValue.ToString();
                         break;
                     }
                 case Operation.Divide:
                     {
                         ValidateSecondTermForDivision();
-                        resultValue = firstTerm / secondTerm;
+                        resultValue = ConvertToDouble(firstTerm) / ConvertToDouble(secondTerm);
                         textbox_result.Text = resultValue.ToString();
+                        break;
+                    }
+                case Operation.IsPrime:
+                    {
+                        if (IsPrime(ConvertToInteger(firstTerm)))
+                        {
+                            lbl_title.Text = ($"Is a prime number");
+                        }
+                        else
+                        {
+                            lbl_title.Text = ($"Is not a prime number");
+                        }
+                        break;
+                    }
+                case Operation.IsOddOrEven:
+                    {
+                        if ((ConvertToInteger(firstTerm)) % 2 == 0)
+                        {
+                            lbl_title.Text = ($"Is an Even number");
+                        }
+                        else
+                        {
+                            lbl_title.Text = ($"Is an Odd number");
+                        }
+                        break;
+                    }
+                case Operation.Power:
+                    {
+                        resultValue = Math.Pow(ConvertToDouble(firstTerm), ConvertToDouble(secondTerm));
+                        textbox_result.Text = resultValue.ToString();
+                        lbl_title.Text = ($"Result");
+                        break;
+                    }
+                case Operation.AbsoluteValue:
+                    {
+                        resultValue = Math.Abs(ConvertToDouble(firstTerm));
+                        textbox_result.Text = resultValue.ToString();
+                        lbl_title.Text = ($"|{firstTerm}|");
+                        break;
+                    }
+
+                case Operation.Reverse:
+                    {
+                        resultValue = Reverse(ConvertToInteger(firstTerm));
+                        textbox_result.Text = resultValue.ToString();
+                        lbl_title.Text = "Reverse";
+                        break;
+                    }
+
+                case Operation.Palindrome:
+                    {
+                        if (IsPalindrom(ConvertToInteger(firstTerm)))
+                        {
+                            lbl_title.Text = ($"Is a palindrome number");
+                        }
+                        else
+                        {
+                            lbl_title.Text = ($"{firstTerm} is not a palindrome number");
+                        }
+                        break;
+                    }
+
+                case Operation.Superpalindrome:
+                    {
+                        if (IsPalindrom(ConvertToInteger(firstTerm)))
+                        {
+
+                            if (IsPalindrom(ConvertToInteger(Math.Pow((ConvertToDouble(firstTerm)), 2).ToString())))
+                            {
+                                lbl_title.Text = ($"Is a Superpalindrom number");
+                            }
+                            else
+                            {
+                                lbl_title.Text = ($"Is not a Superpalindrom number");
+
+                            }
+                        }
+                        else
+                        {
+                            lbl_title.Text = ($"Is not a Superpalindrom number");
+
+                        }
                         break;
                     }
             }
@@ -300,21 +408,152 @@ namespace Calculator
 
         private void ValidateSecondTermForDivision()
         {
-            if (secondTerm == 0)
+            if (ConvertToDouble(secondTerm) == 0)
             {
                 throw new CalculatorException(Error.DivideBy0);
             }
         }
 
-        private static double ConvertDouble(string valueToConvert)
+        private static double ConvertToDouble(string valueToConvert)
         {
             double.TryParse(valueToConvert, out double result);
             return result;
         }
 
+        private static int ConvertToInteger(string valueToConvert)
+        {
+            if (int.TryParse(valueToConvert, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                throw new CalculatorException(Error.IsNotAnInteger);
+            }
+        }
+
+        private static bool IsPrime(int a)
+        {
+            if (a == 1 || a == 0)
+            {
+                return false;
+            }
+            for (int i = 2; i <= Math.Sqrt(a); i++)
+            {
+                if (a % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool IsPalindrom(int a)
+        {
+            return a == Reverse(a);
+        }
+
+        public static int Reverse(int a)
+        {
+            int oglindit = 0;
+            int reminder;
+            int numar = a;
+
+            while (numar > 0)
+            {
+                reminder = numar % 10;
+                oglindit = oglindit * 10 + reminder;
+                numar /= 10;
+            }
+
+            return oglindit;
+        }
+
         private void btn_IsPrime_Click(object sender, EventArgs e)
         {
+            operationButtonPressed = Operation.IsPrime;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
 
+        private void btn_SuperPalindrome_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.Superpalindrome;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
+
+        private void btn_Pow_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.Power;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            lbl_title.Text = "x^y";
+        }
+
+        private void btn_AbsoluteValue_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.AbsoluteValue;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
+
+        private void btn_Palindrome_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.Palindrome;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
+
+        private void btn_Square_Click(object sender, EventArgs e)
+        {
+            isOperationButtonPressed = true;
+            var result = calculatorLogic.DoStuff(Operation.SquareRoot, textbox_result.Text);
+            ProcessResult(result);
+        }
+
+        private void ProcessResult(CalculatorResult result)
+        {
+            lbl_title.Text = result.Message;
+            if (result.IsSuccess)
+            {
+                textbox_result.Text = result.Value;
+            }
+            terms = new List<string> { result.Value };
+        }
+
+        private void btn_Reverse_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.Reverse;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
+
+        private void btn_Odd_Click(object sender, EventArgs e)
+        {
+            operationButtonPressed = Operation.IsOddOrEven;
+            isOperationButtonPressed = true;
+            firstTerm = textbox_result.Text;
+            isResultButtonthelastbuttonpressed = false;
+            TryCatch();
+        }
+
+        private void btn_ChangeSign_Click(object sender, EventArgs e)
+        {
+            textbox_result.Text = ((-1) * (ConvertToDouble(textbox_result.Text))).ToString();
+            isResultButtonthelastbuttonpressed = false;
         }
     }
 }

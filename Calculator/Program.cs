@@ -1,3 +1,4 @@
+using Calculator.Logic;
 using System;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace Calculator
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
-            Application.Run(new Form1());
+            Application.Run(new Form1(new CalculatorLogic()));
         }
     }
 }
