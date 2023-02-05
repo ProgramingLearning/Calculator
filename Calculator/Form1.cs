@@ -295,6 +295,30 @@ namespace Calculator
                         textbox_result.Text = resultValue.ToString();
                         break;
                     }
+                case Operation.RaiseNumberToPower:
+                    {
+                        resultValue = Math.Pow(firstTerm, secondTerm);
+                        textbox_result.Text = resultValue.ToString();
+                        break;
+                    }
+                case Operation.SquareRoot:
+                    {
+                        resultValue = Math.Sqrt(firstTerm);
+                        textbox_result.Text = resultValue.ToString();
+                        break;
+                    }
+                case Operation.NumberParity:
+                    {
+                        if (firstTerm % 2 == 0)
+                        {
+                            textbox_result.Text =                 
+                        }
+                        else
+                        {
+                            textbox_result.Text =
+                        }
+                        break;
+                    }
             }
         }
 
@@ -312,9 +336,29 @@ namespace Calculator
             return result;
         }
 
-        private void btn_IsPrime_Click(object sender, EventArgs e)
+        private void btn_RaiseNumberToPower_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.RaiseNumberToPower;
+            lbl_title.Text = "^";
+        }
+
+        private void btn_SquareRoot_Click(object sender, EventArgs e)
         {
 
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.SquareRoot;
+            lbl_title.Text = "SqRt";
+        }
+
+        private void btn_NumberParity_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.NumberParity;
+            lbl_title.Text = "NumberParity";
         }
     }
 }
