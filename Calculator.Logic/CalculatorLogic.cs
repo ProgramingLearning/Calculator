@@ -6,18 +6,100 @@ namespace Calculator.Logic
 {
     public class CalculatorLogic : ICalculatorLogic
     {
+
         public CalculatorResult DoStuff(Operation operation, params string[] terms)
+
         {
             switch (operation)
             {
                 case Operation.None:
                     break;
                 case Operation.Sum:
-                    break;
+                    {
+                        var termsList = ReadTerms<double>(terms);
+
+                        if (termsList.Count < 2)
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = false,
+                                Message = "To few terms"
+                            };
+                        }
+
+                        else
+                        {
+                            var resultValue = termsList.First();
+                            foreach (var item in termsList.Skip(1))
+                            {
+                                resultValue += item;
+                            }
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Message = "Result",
+                                Value = resultValue.ToString()
+                            };
+                        }
+                    }
+
+
                 case Operation.Subtract:
-                    break;
+                    {
+                        var termsList = ReadTerms<double>(terms);
+
+                        if (termsList.Count < 2)
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = false,
+                                Message = "To few terms"
+                            };
+                        }
+
+                        else
+                        {
+                            var resultValue = termsList.First();
+                            foreach (var item in termsList.Skip(1))
+                            {
+                                resultValue -= item;
+                            }
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Message = "Result",
+                                Value = resultValue.ToString()
+                            };
+                        }
+                    }
+
                 case Operation.Multiply:
-                    break;
+                    {
+                        var termsList = ReadTerms<double>(terms);
+                        if (termsList.Count < 2)
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = false,
+                                Message = "To few terms"
+                            };
+                        }
+
+                        else
+                        {
+                            var resultValue = termsList.First();
+                            foreach (var item in termsList.Skip(1))
+                            {
+                                resultValue *= item;
+                            }
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Message = "Result",
+                                Value = resultValue.ToString()
+                            };
+                        }
+                    }
                 case Operation.Divide:
                     {
                         var termsList = ReadTerms<double>(terms);
@@ -52,12 +134,80 @@ namespace Calculator.Logic
                             };
                         }
                     }
+
                 case Operation.IsPrime:
-                    break;
+                    {
+                        if (IsPrime((ReadTerm<int>(terms))))
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is a Prime number",
+                            };
+                        }
+                        else
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is not a Prime number",
+                            };
+                        }
+                    }
+
                 case Operation.IsOddOrEven:
-                    break;
+                    {
+                        if (ReadTerm<int>(terms) % 2 == 0)
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is an Even number",
+                            };
+                        }
+                        else
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is an Odd number",
+                            };
+                        }
+                    }
                 case Operation.Power:
-                    break;
+                    {
+                        {
+                            var termsList = ReadTerms<double>(terms);
+
+                            if (termsList.Count < 2)
+                            {
+                                return new CalculatorResult
+                                {
+                                    IsSuccess = false,
+                                    Message = "To few terms"
+                                };
+                            }
+
+                            else
+                            {
+                                var resultValue = termsList.First();
+                                foreach (var item in termsList.Skip(1))
+                                {
+                                    resultValue = Math.Pow(resultValue, item);
+                                }
+                                return new CalculatorResult
+                                {
+                                    IsSuccess = true,
+                                    Message = "Result",
+                                    Value = resultValue.ToString()
+                                };
+                            }
+                        }
+                    }
                 case Operation.SquareRoot:
                     {
                         return new CalculatorResult
@@ -68,17 +218,89 @@ namespace Calculator.Logic
                         };
                     }
                 case Operation.AbsoluteValue:
-                    break;
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = true,
+                            Value = Math.Abs(ReadTerm<double>(terms)).ToString(),
+                            Message = "Result"
+                        };
+                    }
                 case Operation.Reverse:
-                    break;
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = true,
+                            Value = (Reverse(ReadTerm<int>(terms))).ToString(),
+                            Message = "Result"
+                        };
+                    }
                 case Operation.Palindrome:
-                    break;
+                    {
+                        if (IsPalindrome((ReadTerm<int>(terms))))
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is a Palindrome number",
+                            };
+                        }
+                        else
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is not a Palindrome number",
+                            };
+                        }
+                    }
                 case Operation.Superpalindrome:
-                    break;
+                    {
+                        if (IsPalindrome((ReadTerm<int>(terms))))
+                        {
+                            if (IsPalindrome((ReadTerm<int>(terms))))
+                            {
+                                return new CalculatorResult
+                                {
+                                    IsSuccess = true,
+                                    Value = (ReadTerm<int>(terms)).ToString(),
+                                    Message = "Is a SuperPalindrome number",
+                                };
+                            }
+                            else
+                            {
+                                return new CalculatorResult
+                                {
+                                    IsSuccess = true,
+                                    Value = (ReadTerm<int>(terms)).ToString(),
+                                    Message = "Is not a SuperPalindrome number",
+                                };
+                            }
+                        }
+                        else
+                        {
+                            return new CalculatorResult
+                            {
+                                IsSuccess = true,
+                                Value = (ReadTerm<int>(terms)).ToString(),
+                                Message = "Is not a SuperPalindrome number",
+                            };
+                        }
+                    }
+                case Operation.ChangeSign:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = true,
+                            Value = ((-1) * ReadTerm<double>(terms)).ToString(),
+                            Message = "Result"
+                        };
+                    }
                 default:
                     break;
             }
-
             return new CalculatorResult();
         }
 
@@ -110,7 +332,12 @@ namespace Calculator.Logic
                 return ConvertToDouble(valueToConvert);
             }
 
-            return default(T);
+            if (typeof(T) == typeof(int))
+            {
+                return ConvertToInteger(valueToConvert);
+            }
+
+            return default;
         }
 
         private static double ConvertToDouble(string valueToConvert)
@@ -118,5 +345,71 @@ namespace Calculator.Logic
             double.TryParse(valueToConvert, out double result);
             return result;
         }
+
+        private static int ConvertToInteger(string valueToConvert)
+
+        {
+            if (int.TryParse(valueToConvert, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                //must give the error result
+                return result;
+            }
+        }
+
+        private static bool IsPrime(int valueToCheck)
+        {
+            bool isPrime = true;
+            if (valueToCheck == 1 || valueToCheck == 0)
+            {
+                return false;
+            }
+            for (int i = 2; i <= Math.Sqrt(valueToCheck); i++)
+            {
+                if (valueToCheck % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return isPrime;
+        }
+
+        private static bool IsPalindrome(int valueToCheck)
+        {
+            int reversed = Reverse(valueToCheck);
+            bool isPalindrom;
+
+            if (valueToCheck == reversed)
+            {
+            isPalindrom = true;
+            }
+            else
+            {
+            isPalindrom = false;
+            }
+            return isPalindrom;
+        }
+    
+
+    public static int Reverse(int a)
+    {
+        int oglindit = 0;
+        int reminder;
+        int numar = a;
+
+        while (numar > 0)
+        {
+            reminder = numar % 10;
+            oglindit = oglindit * 10 + reminder;
+            numar /= 10;
+        }
+
+        return oglindit;
     }
+
+}
 }

@@ -2,6 +2,6 @@
 {
     public interface ICalculatorLogic
     {
-        CalculatorResult DoStuff(Operation operation, params string[] input);
+        CalculatorResult DoStuff(Operation operation,  params string[] input);
     }
 }

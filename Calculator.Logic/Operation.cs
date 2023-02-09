@@ -14,7 +14,8 @@
         AbsoluteValue = 9,
         Reverse = 10,
         Palindrome = 11,
-        Superpalindrome = 12
+        Superpalindrome = 12,
+        ChangeSign = 13
     }
 
 }
