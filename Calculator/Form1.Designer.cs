@@ -53,6 +53,9 @@ namespace Calculator
             this.btn_SquareRoot = new System.Windows.Forms.Button();
             this.btn_RaiseNumberToPower = new System.Windows.Forms.Button();
             this.btn_NumberParity = new System.Windows.Forms.Button();
+            this.btn_MirroredNumber = new System.Windows.Forms.Button();
+            this.btn_IsPrime = new System.Windows.Forms.Button();
+            this.btn_PalindromeSuperPalindrome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_4
@@ -70,7 +73,7 @@ namespace Calculator
             // btn_clear
             // 
             this.btn_clear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_clear.Location = new System.Drawing.Point(290, 140);
+            this.btn_clear.Location = new System.Drawing.Point(369, 140);
             this.btn_clear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(39, 34);
@@ -154,7 +157,7 @@ namespace Calculator
             // btn_result
             // 
             this.btn_result.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_result.Location = new System.Drawing.Point(290, 184);
+            this.btn_result.Location = new System.Drawing.Point(369, 184);
             this.btn_result.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_result.Name = "btn_result";
             this.btn_result.Size = new System.Drawing.Size(39, 79);
@@ -250,7 +253,7 @@ namespace Calculator
             // btn_CE
             // 
             this.btn_CE.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_CE.Location = new System.Drawing.Point(290, 94);
+            this.btn_CE.Location = new System.Drawing.Point(369, 94);
             this.btn_CE.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_CE.Name = "btn_CE";
             this.btn_CE.Size = new System.Drawing.Size(39, 34);
@@ -296,10 +299,10 @@ namespace Calculator
             // btn_SquareRoot
             // 
             this.btn_SquareRoot.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_SquareRoot.Location = new System.Drawing.Point(221, 140);
+            this.btn_SquareRoot.Location = new System.Drawing.Point(267, 94);
             this.btn_SquareRoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_SquareRoot.Name = "btn_SquareRoot";
-            this.btn_SquareRoot.Size = new System.Drawing.Size(40, 34);
+            this.btn_SquareRoot.Size = new System.Drawing.Size(39, 34);
             this.btn_SquareRoot.TabIndex = 31;
             this.btn_SquareRoot.Text = "SqRt";
             this.btn_SquareRoot.UseVisualStyleBackColor = true;
@@ -308,7 +311,7 @@ namespace Calculator
             // btn_RaiseNumberToPower
             // 
             this.btn_RaiseNumberToPower.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_RaiseNumberToPower.Location = new System.Drawing.Point(221, 94);
+            this.btn_RaiseNumberToPower.Location = new System.Drawing.Point(222, 94);
             this.btn_RaiseNumberToPower.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_RaiseNumberToPower.Name = "btn_RaiseNumberToPower";
             this.btn_RaiseNumberToPower.Size = new System.Drawing.Size(39, 34);
@@ -320,7 +323,7 @@ namespace Calculator
             // btn_NumberParity
             // 
             this.btn_NumberParity.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_NumberParity.Location = new System.Drawing.Point(221, 229);
+            this.btn_NumberParity.Location = new System.Drawing.Point(219, 229);
             this.btn_NumberParity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_NumberParity.Name = "btn_NumberParity";
             this.btn_NumberParity.Size = new System.Drawing.Size(63, 34);
@@ -329,11 +332,50 @@ namespace Calculator
             this.btn_NumberParity.UseVisualStyleBackColor = true;
             this.btn_NumberParity.Click += new System.EventHandler(this.btn_NumberParity_Click);
             // 
+            // btn_MirroredNumber
+            // 
+            this.btn_MirroredNumber.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_MirroredNumber.Location = new System.Drawing.Point(221, 184);
+            this.btn_MirroredNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_MirroredNumber.Name = "btn_MirroredNumber";
+            this.btn_MirroredNumber.Size = new System.Drawing.Size(63, 34);
+            this.btn_MirroredNumber.TabIndex = 34;
+            this.btn_MirroredNumber.Text = "Mirrored Number";
+            this.btn_MirroredNumber.UseVisualStyleBackColor = true;
+            this.btn_MirroredNumber.Click += new System.EventHandler(this.btn_MirroredNumber_Click);
+            // 
+            // btn_IsPrime
+            // 
+            this.btn_IsPrime.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_IsPrime.Location = new System.Drawing.Point(221, 140);
+            this.btn_IsPrime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_IsPrime.Name = "btn_IsPrime";
+            this.btn_IsPrime.Size = new System.Drawing.Size(61, 34);
+            this.btn_IsPrime.TabIndex = 35;
+            this.btn_IsPrime.Text = "IsPrime";
+            this.btn_IsPrime.UseVisualStyleBackColor = true;
+            this.btn_IsPrime.Click += new System.EventHandler(this.btn_IsPrime_Click);
+            // 
+            // btn_PalindromeSuperPalindrome
+            // 
+            this.btn_PalindromeSuperPalindrome.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_PalindromeSuperPalindrome.Location = new System.Drawing.Point(288, 140);
+            this.btn_PalindromeSuperPalindrome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_PalindromeSuperPalindrome.Name = "btn_PalindromeSuperPalindrome";
+            this.btn_PalindromeSuperPalindrome.Size = new System.Drawing.Size(76, 34);
+            this.btn_PalindromeSuperPalindrome.TabIndex = 36;
+            this.btn_PalindromeSuperPalindrome.Text = "PalindromeSuperPalindrome";
+            this.btn_PalindromeSuperPalindrome.UseVisualStyleBackColor = true;
+            this.btn_PalindromeSuperPalindrome.Click += new System.EventHandler(this.btn_PalindromeSuperPalindrome_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 286);
+            this.ClientSize = new System.Drawing.Size(484, 278);
+            this.Controls.Add(this.btn_PalindromeSuperPalindrome);
+            this.Controls.Add(this.btn_IsPrime);
+            this.Controls.Add(this.btn_MirroredNumber);
             this.Controls.Add(this.btn_NumberParity);
             this.Controls.Add(this.btn_RaiseNumberToPower);
             this.Controls.Add(this.btn_SquareRoot);
@@ -393,6 +435,9 @@ namespace Calculator
         private System.Windows.Forms.Button btn_SquareRoot;
         private System.Windows.Forms.Button btn_RaiseNumberToPower;
         private System.Windows.Forms.Button btn_NumberParity;
+        private System.Windows.Forms.Button btn_MirroredNumber;
+        private System.Windows.Forms.Button btn_IsPrime;
+        private System.Windows.Forms.Button btn_PalindromeSuperPalindrome;
     }
 }
 
