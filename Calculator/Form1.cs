@@ -311,12 +311,46 @@ namespace Calculator
                     {
                         if (firstTerm % 2 == 0)
                         {
-                            textbox_result.Text =                 
+                           lbl_title.Text = "The number is even.";                
                         }
                         else
                         {
-                            textbox_result.Text =
+                            lbl_title.Text = "The number is odd.";
                         }
+                        break;
+                    }
+                case Operation.MirroredNumber:
+                    {
+                        uint resultValue = 0;
+                        uint number = Convert.ToUInt32(firstTerm);
+                        while (number != 0)
+                        {
+                            resultValue = resultValue * 10 + number % 10;
+                            number /= 10;
+                        }
+                        lbl_title.Text = $"The mirrored number is {resultValue}";
+                        break;
+                    }
+                case Operation.IsPrime:
+                    {
+                        uint number = Convert.ToUInt32(firstTerm);
+                        if (number == 0 || number == 1)
+                        {
+                            lbl_title.Text = $"{number} is not a prime number.";
+                        }
+                        for (uint divisor = 2; divisor <= Math.Sqrt(firstTerm); divisor++)
+                        {
+                          if (number % divisor == 0)
+                          {
+                             lbl_title.Text = $"{number} is not a prime number.";
+                          }
+                          else
+                            {
+                                lbl_title.Text = $"{number} is  a prime number.";
+                            }
+                        }
+
+                       
                         break;
                     }
             }
@@ -359,6 +393,22 @@ namespace Calculator
             firstTerm = ConvertDouble(textbox_result.Text);
             operationPerformed = Operation.NumberParity;
             lbl_title.Text = "NumberParity";
+        }
+
+        private void btn_MirroredNumber_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.MirroredNumber;
+            lbl_title.Text = "MirroredNumber";
+        }
+
+        private void btn_IsPrime_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.IsPrime;
+            lbl_title.Text = "IsPrime";
         }
     }
 }

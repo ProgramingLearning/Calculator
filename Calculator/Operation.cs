@@ -10,6 +10,8 @@
         RaiseNumberToPower = 5,
         SquareRoot = 6,
         NumberParity = 7,
+        MirroredNumber = 8,
+        IsPrime = 9,
     }
 
 }
