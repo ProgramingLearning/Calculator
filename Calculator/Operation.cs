@@ -13,6 +13,8 @@
         MirroredNumber = 8,
         IsPrime = 9,
         PalindromeSuperPalindrome = 10,
+        LeastCommonMultiple = 11,
+        BiggestCommunalDivisor = 12,
     }
 
 }

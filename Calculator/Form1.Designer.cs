@@ -56,6 +56,8 @@ namespace Calculator
             this.btn_MirroredNumber = new System.Windows.Forms.Button();
             this.btn_IsPrime = new System.Windows.Forms.Button();
             this.btn_PalindromeSuperPalindrome = new System.Windows.Forms.Button();
+            this.btn_LeastCommonMultiple = new System.Windows.Forms.Button();
+            this.btn_BiggestCommunalDivisor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_4
@@ -368,11 +370,37 @@ namespace Calculator
             this.btn_PalindromeSuperPalindrome.UseVisualStyleBackColor = true;
             this.btn_PalindromeSuperPalindrome.Click += new System.EventHandler(this.btn_PalindromeSuperPalindrome_Click);
             // 
+            // btn_LeastCommonMultiple
+            // 
+            this.btn_LeastCommonMultiple.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_LeastCommonMultiple.Location = new System.Drawing.Point(287, 184);
+            this.btn_LeastCommonMultiple.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_LeastCommonMultiple.Name = "btn_LeastCommonMultiple";
+            this.btn_LeastCommonMultiple.Size = new System.Drawing.Size(76, 34);
+            this.btn_LeastCommonMultiple.TabIndex = 37;
+            this.btn_LeastCommonMultiple.Text = "CMMMC";
+            this.btn_LeastCommonMultiple.UseVisualStyleBackColor = true;
+            this.btn_LeastCommonMultiple.Click += new System.EventHandler(this.btn_LeastCommonMultiple_Click);
+            // 
+            // btn_BiggestCommunalDivisor
+            // 
+            this.btn_BiggestCommunalDivisor.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_BiggestCommunalDivisor.Location = new System.Drawing.Point(287, 229);
+            this.btn_BiggestCommunalDivisor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_BiggestCommunalDivisor.Name = "btn_BiggestCommunalDivisor";
+            this.btn_BiggestCommunalDivisor.Size = new System.Drawing.Size(76, 34);
+            this.btn_BiggestCommunalDivisor.TabIndex = 38;
+            this.btn_BiggestCommunalDivisor.Text = "CMMDC";
+            this.btn_BiggestCommunalDivisor.UseVisualStyleBackColor = true;
+            this.btn_BiggestCommunalDivisor.Click += new System.EventHandler(this.btn_BiggestCommunalDivisor_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 278);
+            this.Controls.Add(this.btn_BiggestCommunalDivisor);
+            this.Controls.Add(this.btn_LeastCommonMultiple);
             this.Controls.Add(this.btn_PalindromeSuperPalindrome);
             this.Controls.Add(this.btn_IsPrime);
             this.Controls.Add(this.btn_MirroredNumber);
@@ -438,6 +466,8 @@ namespace Calculator
         private System.Windows.Forms.Button btn_MirroredNumber;
         private System.Windows.Forms.Button btn_IsPrime;
         private System.Windows.Forms.Button btn_PalindromeSuperPalindrome;
+        private System.Windows.Forms.Button btn_LeastCommonMultiple;
+        private System.Windows.Forms.Button btn_BiggestCommunalDivisor;
     }
 }
 

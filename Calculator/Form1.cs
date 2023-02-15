@@ -377,6 +377,51 @@ namespace Calculator
                         }
                         break;
                     }
+                    case Operation.LeastCommonMultiple:
+                    {
+                        var number1 = Convert.ToUInt32(firstTerm);
+                        var number2 = Convert.ToUInt32(secondTerm);
+
+                        var number1Aux = number1;
+                        var number2Aux = number2;
+
+                        while (number1Aux != number2Aux)
+                        {
+                            if (number1Aux < number2Aux)
+                            {
+                                number1Aux += number1;
+                            }
+                            else
+                            {
+                                number2Aux += number2;
+                            }
+                        }
+
+                        lbl_title.Text = $"CMMMC between {number1} and {number2} is {number2Aux}.";
+                        break;
+                    }
+                     case Operation.BiggestCommunalDivisor:
+                    {
+                        var number1 = Convert.ToUInt32(firstTerm);
+                        var number2 = Convert.ToUInt32(secondTerm);
+
+                        var number1Aux = number1;
+                        var number2Aux = number2;
+
+                        while (number1Aux != number2Aux)
+                        {
+                            if (number1Aux > number2Aux)
+                            {
+                                number1Aux -= number2Aux;
+                            }
+                            else
+                            {
+                                number2Aux -= number1Aux;
+                            }
+                        }
+                        lbl_title.Text = $"CMMDC between {number1} and {number2} is {number2Aux}.";
+                        break;
+                    }
             }
         }
 
@@ -453,6 +498,22 @@ namespace Calculator
             }
 
             return ogl;
+        }
+
+        private void btn_LeastCommonMultiple_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.LeastCommonMultiple;
+            lbl_title.Text = "LeastCommonMultiple";
+        }
+
+        private void btn_BiggestCommunalDivisor_Click(object sender, EventArgs e)
+        {
+            isOperationPerformed = true;
+            firstTerm = ConvertDouble(textbox_result.Text);
+            operationPerformed = Operation.BiggestCommunalDivisor;
+            lbl_title.Text = "BiggestCommunalDivisor";
         }
     }
 }
