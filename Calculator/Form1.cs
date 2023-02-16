@@ -311,7 +311,7 @@ namespace Calculator
                     {
                         if (firstTerm % 2 == 0)
                         {
-                           lbl_title.Text = "The number is even.";                
+                            lbl_title.Text = "The number is even.";
                         }
                         else
                         {
@@ -340,11 +340,11 @@ namespace Calculator
                         }
                         for (uint divisor = 2; divisor <= Math.Sqrt(firstTerm); divisor++)
                         {
-                          if (number % divisor == 0)
-                          {
-                             lbl_title.Text = $"{number} is not a prime number.";
-                          }
-                          else
+                            if (number % divisor == 0)
+                            {
+                                lbl_title.Text = $"{number} is not a prime number.";
+                            }
+                            else
                             {
                                 lbl_title.Text = $"{number} is  a prime number.";
                             }
@@ -377,7 +377,7 @@ namespace Calculator
                         }
                         break;
                     }
-                    case Operation.LeastCommonMultiple:
+                case Operation.LeastCommonMultiple:
                     {
                         var number1 = Convert.ToUInt32(firstTerm);
                         var number2 = Convert.ToUInt32(secondTerm);
@@ -400,7 +400,7 @@ namespace Calculator
                         lbl_title.Text = $"CMMMC between {number1} and {number2} is {number2Aux}.";
                         break;
                     }
-                     case Operation.BiggestCommunalDivisor:
+                case Operation.BiggestCommunalDivisor:
                     {
                         var number1 = Convert.ToUInt32(firstTerm);
                         var number2 = Convert.ToUInt32(secondTerm);
