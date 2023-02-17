@@ -2,6 +2,20 @@
 {
     public interface ICalculatorLogic
     {
-        CalculatorResult DoStuff(Operation operation,  params string[] input);
+        CalculatorResult DoMultipleTermOperation();
+
+        CalculatorResult DoSingleTermOperation();
+
+        void AddTerm(string term);
+
+        void ResetTerms();
+
+        void SetCurrentOperation(Operation operation);
+
+        Operation GetCurrentOperation();
+
+        bool ShouldPerformOperationForCurrentTerms(Operation newOperation);
+
+        bool ShouldRepeatLastOperation(Operation newOperation);
     }
 }

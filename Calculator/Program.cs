@@ -15,7 +15,7 @@ namespace Calculator
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
-            Application.Run(new Form1(new CalculatorLogic()));
+            Application.Run(new CalculatorForm(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor())));
         }
     }
 }

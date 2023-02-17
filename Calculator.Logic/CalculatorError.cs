@@ -1,10 +1,10 @@
 ﻿namespace Calculator.Logic
 {
-    public class CalculatorError
+
+    public class CalculatorError: ICalculatorError
     {
 
-
-        public void HandleCalculatorException(CalculatorException ex)
+        public CalculatorResult HandleCalculatorException(CalculatorException ex)
         {
             switch (ex.ErrorType)
             {
@@ -12,24 +12,49 @@
                     break;
                 case Error.DivideBy0:
                     {
-                        //Message = "Cannot divide by 0";
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "Can not divide by 0"
+                        };
                     }
-                    break;
                 case Error.NoOperationSelected:
                     {
-                        //Message = "Select operation: +, -, * or /";
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message ="Select operation: +, -, *or / "
+                        };
                     }
-                    break;
                 case Error.IsNotAnInteger:
                     {
-                        //Message = "The number is not an Integer";
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "The number is not an Integer"
+                        };
                     }
-                    break;
-                case Error.Error4:
-                    break;
+                case Error.ToFewTerms:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "To few terms"
+                        };
+                    }
+                case Error.IsNotADouble:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "The number is not a Double"
+                        };
+                    }
+
                 default:
                     break;
             }
+            return new CalculatorResult();
         }
     }
 }
