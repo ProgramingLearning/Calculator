@@ -13,7 +13,6 @@ namespace Calculator.Logic
         private Operation _currentOperation;
         private string _lastTerm;
 
-
         public CalculatorLogic(ICalculatorError calculatorError, ICalculatorValidator calculatorValidator, IStringToNumberConvertor stringToNumberConverter)
         {
             _calculatorError = calculatorError;
@@ -56,6 +55,16 @@ namespace Calculator.Logic
             _terms= new List<string>();
         }
 
+        private double SubstractionAction(double term, double result)
+        {
+            return result - term;
+        }
+
+        private double MultiplyAction(double term, double result)
+        {
+            return result * term;
+        }
+
         public CalculatorResult DoMultipleTermOperation()
         {
             if (ShouldRepeatLastOperation(_currentOperation))
@@ -71,6 +80,7 @@ namespace Calculator.Logic
                 return _calculatorError.HandleCalculatorException(ex);
             }
         }
+
         public CalculatorResult DoSingleTermOperation()
         {
             try
@@ -104,11 +114,8 @@ namespace Calculator.Logic
                         }
                         else
                         {
-                            var resultValue = termsList.First();
-                            foreach (var item in termsList.Skip(1))
-                            {
-                                resultValue += item;
-                            }
+                            var resultValue = DoSpecificAction(termsList, (x, y) => { return x + y; });
+
                             calculatorResult = new CalculatorResult
                             {
                                 IsSuccess = true,
@@ -132,11 +139,8 @@ namespace Calculator.Logic
                         }
                         else
                         {
-                            var resultValue = termsList.First();
-                            foreach (var item in termsList.Skip(1))
-                            {
-                                resultValue -= item;
-                            }
+                            var resultValue = DoSpecificAction(termsList, SubstractionAction);
+
                             calculatorResult = new CalculatorResult
                             {
                                 IsSuccess = true,
@@ -159,11 +163,7 @@ namespace Calculator.Logic
                         }
                         else
                         {
-                            var resultValue = termsList.First();
-                            foreach (var item in termsList.Skip(1))
-                            {
-                                resultValue *= item;
-                            }
+                            var resultValue = DoSpecificAction(termsList, MultiplyAction);
                             calculatorResult = new CalculatorResult
                             {
                                 IsSuccess = true,
@@ -367,6 +367,13 @@ namespace Calculator.Logic
             }
 
             return calculatorResult;
+        }
+
+        private static double DoSpecificAction(List<double> termsList, Func<double, double, double> action)
+        {
+            var result = termsList.First();
+            termsList.Skip(1).ToList().ForEach(x => { result = action(x, result); });
+            return result;
         }
 
         private static bool IsPrime(int valueToCheck)
