@@ -333,33 +333,33 @@ namespace Calculator
                     }
                 case Operation.IsPrime:
                     {
-                        uint number = Convert.ToUInt32(firstTerm);
-                        if (number == 0 || number == 1)
+                        if (firstTerm <= 1)
                         {
-                            lbl_title.Text = $"{number} is not a prime number.";
+                            lbl_title.Text = $"{firstTerm} is not a prime number.";
                         }
-                        for (uint divisor = 2; divisor <= Math.Sqrt(firstTerm); divisor++)
+                        else
                         {
-                            if (number % divisor == 0)
+                            for (double divisor = 2; divisor <= Math.Sqrt(firstTerm); divisor++)
                             {
-                                lbl_title.Text = $"{number} is not a prime number.";
-                            }
-                            else
-                            {
-                                lbl_title.Text = $"{number} is  a prime number.";
+                                if (firstTerm % divisor == 0)
+                                {
+                                    lbl_title.Text = $"{firstTerm} is not a prime number.";
+                                    break;
+                                }
+                                else
+                                {
+                                    lbl_title.Text = $"{firstTerm} is  a prime number.";
+                                }
                             }
                         }
                         break;
                     }
                 case Operation.PalindromeSuperPalindrome:
                     {
-                        uint number = Convert.ToUInt32(firstTerm);
-                        var getNumber1 = GetMirrored(number);
-                        uint mirrored = Convert.ToUInt32(getNumber1);
+                        double mirrored = GetMirrored(firstTerm);
                         var numberraisedtopower = Math.Pow(firstTerm, 2);
-                        var getNumber2 = GetMirrored(numberraisedtopower);
-                        uint mirrored2 = Convert.ToUInt32(getNumber2);
-                        if (number == mirrored)
+                        var mirrored2 = GetMirrored(numberraisedtopower);
+                        if (firstTerm == mirrored)
                         {
                             if (numberraisedtopower == mirrored2)
                             {
@@ -496,8 +496,9 @@ namespace Calculator
                 ogl = ogl * 10 + number % 10;
                 number /= 10;
             }
+            double ConvertedOgl = Convert.ToDouble(ogl);
 
-            return ogl;
+            return ConvertedOgl;
         }
 
         private void btn_LeastCommonMultiple_Click(object sender, EventArgs e)
