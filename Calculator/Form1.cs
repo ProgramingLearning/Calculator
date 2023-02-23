@@ -163,13 +163,13 @@ namespace Calculator
         private void btn_point_Click(object sender, EventArgs e)
 
         {
-            if (textbox_result.Text.Contains(","))
+            if (textbox_result.Text.Contains("."))
             {
-                lbl_title.Text = "Already contains a ,";
+                lbl_title.Text = "Already contains a .";
             }
             else
             {
-                textbox_result.Text = $"{textbox_result.Text},";
+                textbox_result.Text = $"{textbox_result.Text}.";
             }
         }
 
@@ -309,14 +309,7 @@ namespace Calculator
                     }
                 case Operation.NumberParity:
                     {
-                        if (firstTerm % 2 == 0)
-                        {
-                            lbl_title.Text = "The number is even.";
-                        }
-                        else
-                        {
-                            lbl_title.Text = "The number is odd.";
-                        }
+                        SetLabelTitleTextBasedOnFirstTermParity();
                         break;
                     }
                 case Operation.MirroredNumber:
@@ -333,24 +326,33 @@ namespace Calculator
                     }
                 case Operation.IsPrime:
                     {
-                        if (firstTerm <= 1)
+                        IsNaturalNumber(firstTerm);
+                        if (IsNaturalNumber(firstTerm))
                         {
-                            lbl_title.Text = $"{firstTerm} is not a prime number.";
+                            uint convertedFirstTerm = Convert.ToUInt32(firstTerm);
+                            if (convertedFirstTerm <= 1)
+                            {
+                                lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
+                            }
+                            else
+                            {
+                                for (double divisor = 2; divisor <= Math.Sqrt(convertedFirstTerm); divisor++)
+                                {
+                                    if (convertedFirstTerm % divisor == 0)
+                                    {
+                                        lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        lbl_title.Text = $"{convertedFirstTerm} is  a prime number.";
+                                    }
+                                }
+                            }
                         }
                         else
                         {
-                            for (double divisor = 2; divisor <= Math.Sqrt(firstTerm); divisor++)
-                            {
-                                if (firstTerm % divisor == 0)
-                                {
-                                    lbl_title.Text = $"{firstTerm} is not a prime number.";
-                                    break;
-                                }
-                                else
-                                {
-                                    lbl_title.Text = $"{firstTerm} is  a prime number.";
-                                }
-                            }
+                            lbl_title.Text = $" {firstTerm} is not a natural number.";
                         }
                         break;
                     }
@@ -487,10 +489,10 @@ namespace Calculator
             operationPerformed = Operation.PalindromeSuperPalindrome;
             lbl_title.Text = "PalindromeSuperPalindrome";
         }
-        private static double GetMirrored(double firstTerm)
+        private static double GetMirrored(double value)
         {
             uint ogl = 0;
-            uint number = Convert.ToUInt32(firstTerm);
+            uint number = Convert.ToUInt32(value);
             while (number != 0)
             {
                 ogl = ogl * 10 + number % 10;
@@ -515,6 +517,30 @@ namespace Calculator
             firstTerm = ConvertDouble(textbox_result.Text);
             operationPerformed = Operation.BiggestCommunalDivisor;
             lbl_title.Text = "BiggestCommunalDivisor";
+        }
+        private bool IsNaturalNumber(double value)
+        {
+            if (Math.Floor(value) == value)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        private void SetLabelTitleTextBasedOnFirstTermParity()
+        {
+            if (firstTerm % 2 == 0)
+            {
+                lbl_title.Text = "The number is even.";
+            }
+            else
+            {
+                lbl_title.Text = "The number is odd.";
+            }
         }
     }
 }
