@@ -190,7 +190,7 @@ namespace Calculator
             AddNewTermToTheList();
             isOperationButtonPressed = true;
             _calculatorLogic.SetCurrentOperation(operationSelected);
-            var result = _calculatorLogic.DoSingleTermOperation();
+            var result = _calculatorLogic.DoCalculation();
             DisplayCalculatorResult(result);
         }
 
