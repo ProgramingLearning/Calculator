@@ -13,8 +13,8 @@
         SquareRoot = 8,
         AbsoluteValue = 9,
         Reverse = 10,
-        Palindrome = 11,
-        Superpalindrome = 12,
+        IsPalindrome = 11,
+        IsSuperpalindrome = 12,
         ChangeSign = 13
     }
 

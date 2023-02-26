@@ -7,6 +7,24 @@ namespace Calculator.Logic
 {
     public class StringToNumberConvertor : IStringToNumberConvertor
     {
+        public T ReadTerm<T>(List<string> input)
+        {
+            if (input.Count > 0)
+            {
+                return (T)ConvertStringToType<T>(input[0]);
+            }
+            return default(T);
+        }
+
+        public List<T> ReadTerms<T>(List<string> input)
+        {
+            var result = new List<T>();
+            for (int i = 0; i < input.Count; i++)
+            {
+                result.Add((T)ConvertStringToType<T>(input[i]));
+            }
+            return result;
+        }
         private static object ConvertStringToType<T>(string valueToConvert)
         {
             if (typeof(T) == typeof(double))
@@ -42,25 +60,6 @@ namespace Calculator.Logic
             {
                 throw new CalculatorException(Error.IsNotAnInteger);
             }
-        }
-
-        public T ReadTerm<T>(List<string> input)
-        {
-            if (input.Count > 0)
-            {
-                return (T)ConvertStringToType<T>(input[0]);
-            }
-            return default(T);
-        }
-
-        public List<T> ReadTerms<T>(List<string> input)
-        {
-            var result = new List<T>();
-            for (int i = 0; i < input.Count; i++)
-            {
-                result.Add((T)ConvertStringToType<T>(input[i]));
-            }
-            return result;
         }
     }
 }

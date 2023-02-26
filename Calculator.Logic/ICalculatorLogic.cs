@@ -4,7 +4,7 @@
     {
         CalculatorResult DoMultipleTermOperation();
 
-        CalculatorResult DoCalculation();
+        CalculatorResult DoSingleTermOperation();
 
         void AddTerm(string term);
 

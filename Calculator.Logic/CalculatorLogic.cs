@@ -25,8 +25,18 @@ namespace Calculator.Logic
         {
             if (ShouldRepeatLastOperation(_currentOperation))
             {
-                AddLastTermUsed(_lastTerm);
+                AddLastTermUsed();
             }
+            return HandleErrorsWithTryAndCatchAndDoCalculation();
+        }
+
+        public CalculatorResult DoSingleTermOperation()
+        {
+            return HandleErrorsWithTryAndCatchAndDoCalculation();
+        }
+
+        private CalculatorResult HandleErrorsWithTryAndCatchAndDoCalculation()
+        {
             try
             {
                 return DoCalculation();
@@ -37,7 +47,7 @@ namespace Calculator.Logic
             }
         }
 
-        public CalculatorResult DoCalculation()
+        private CalculatorResult DoCalculation()
         {
             _lastTerm = _terms.LastOrDefault();
             _calculatorValidator.ValidateOperation(_currentOperation);
@@ -46,127 +56,95 @@ namespace Calculator.Logic
             {
                 case Operation.Sum:
                     {
-                        List<double> termsList = GetTerms();
-                        DoValidationForTwoTermsOperation(termsList);
-                        var resultValue = DoSpecificTwoTermsAction(termsList, (x, y) => { return x + y; });
-                        calculatorResult = DisplayDefault(resultValue);
+                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x + y; });
+                        calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Subtract:
                     {
-                        List<double> termsList = GetTerms();
-                        DoValidationForTwoTermsOperation(termsList);
-                        var resultValue = DoSpecificTwoTermsAction(termsList, (x, y) => { return x - y; });
-                        calculatorResult = DisplayDefault(resultValue);
+                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; });
+                        calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Multiply:
                     {
-                        List<double> termsList = GetTerms();
-                        DoValidationForTwoTermsOperation(termsList);
-                        var resultValue = DoSpecificTwoTermsAction(termsList, (x, y) => { return x * y; });
-                        calculatorResult = DisplayDefault(resultValue);
+                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; });
+                        calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Divide:
                     {
-                        List<double> termsList = GetTerms();
-                        DoValidationForDivision(termsList);
-                        var resultValue = DoSpecificTwoTermsAction(termsList, (x, y) => { return x / y; });
-                        calculatorResult = DisplayDefault(resultValue);
+                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; });
+                        calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Power:
                     {
-                        List<double> termsList = GetTerms();
-                        DoValidationForTwoTermsOperation(termsList);
-                        var resultValue = DoSpecificTwoTermsAction(termsList, (x, y) => { return Math.Pow(x, y); });
-                        calculatorResult = DisplayDefault(resultValue);
+                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); });
+                        calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.IsPrime:
                     {
-                        int termToCheck = GetIntTermToCheck();
+                        int termToCheck = GetIntTerm();
                         if (IsPrime(termToCheck))
                         {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is a Prime number");
+                            calculatorResult = GetCalculatorResult(true, termToCheck, "Is a Prime number");
                         }
                         else
                         {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is not a Prime number");
+                            calculatorResult = GetCalculatorResult(true, termToCheck, "Is not a Prime number");
                         }
                         break;
                     }
                 case Operation.IsOddOrEven:
                     {
-                        int termToCheck = GetIntTermToCheck();
-                        if (IsEven(termToCheck))
-                        {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is an Even number");
-                        }
-                        else
-                        {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is an Odd number");
-                        }
+                        int termToCheck = GetIntTerm();
+                        calculatorResult = IsOddOrEven(termToCheck);
                         break;
                     }
                 case Operation.SquareRoot:
                     {
-                        double termToCheck = GetDoubleTermToCheck();
-                        calculatorResult = DisplayDefault(Math.Sqrt(termToCheck));
+                        double termToCheck = GetDoubleTerm();
+                        calculatorResult = GetDefaultCalculatorResult(Math.Sqrt(termToCheck));
                         break;
                     }
                 case Operation.AbsoluteValue:
                     {
-                        double termToCheck = GetDoubleTermToCheck();
-                        calculatorResult = DisplayDefault(Math.Abs(termToCheck));
+                        double termToCheck = GetDoubleTerm();
+                        calculatorResult = GetDefaultCalculatorResult(Math.Abs(termToCheck));
                         break;
                     }
                 case Operation.Reverse:
                     {
-                        int termToCheck = GetIntTermToCheck();
-                        calculatorResult = DisplayDefault(Reverse(termToCheck));
+                        int termToCheck = GetIntTerm();
+                        calculatorResult = GetDefaultCalculatorResult(Reverse(termToCheck));
 
                         break;
                     }
-                case Operation.Palindrome:
+                case Operation.IsPalindrome:
                     {
-                        int termToCheck = GetIntTermToCheck();
+                        int termToCheck = GetIntTerm();
                         if (IsPalindrome(termToCheck))
                         {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is a Palindrome number");
+                            calculatorResult = GetCalculatorResult(true, termToCheck, "Is a Palindrome number");
                         }
                         else
                         {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is not a Palindrome number");
+                            calculatorResult = GetCalculatorResult(true, termToCheck, "Is not a Palindrome number");
                         }
                         break;
                     }
-                case Operation.Superpalindrome:
+                case Operation.IsSuperpalindrome:
                     {
-                        int termToCheck = GetIntTermToCheck();
-                        if (IsPalindrome(termToCheck))
-                        {
-                            int valueToCheck = RaiseToPowerTwo(termToCheck);
-                            if (IsPalindrome(valueToCheck))
-                            {
-                                calculatorResult = CalculatorResult(true, termToCheck, "Is a SuperPalindrome number");
-                            }
-                            else
-                            {
-                                calculatorResult = CalculatorResult(true, termToCheck, "Is not a SuperPalindrome number");
-                            }
-                        }
-                        else
-                        {
-                            calculatorResult = CalculatorResult(true, termToCheck, "Is not a SuperPalindrome number");
-                        }
+                        int termToCheck = GetIntTerm();
+                        calculatorResult = IsSuperpalindrome(termToCheck);
                         break;
                     }
                 case Operation.ChangeSign:
                     {
-                        double termToCheck = GetDoubleTermToCheck();
-                        calculatorResult = ChangeSign(termToCheck);
+                        double termToCheck = GetDoubleTerm();
+                        calculatorResult = GetDefaultCalculatorResultWithOpositeSign(termToCheck);
                         break;
                     }
                 default:
@@ -177,41 +155,79 @@ namespace Calculator.Logic
             return calculatorResult;
         }
 
+        private static CalculatorResult IsOddOrEven(int termToCheck)
+        {
+            CalculatorResult calculatorResult;
+            if (IsEven(termToCheck))
+            {
+                calculatorResult = GetCalculatorResult(true, termToCheck, "Is an Even number");
+            }
+            else
+            {
+                calculatorResult = GetCalculatorResult(true, termToCheck, "Is an Odd number");
+            }
+
+            return calculatorResult;
+        }
+
+        private static CalculatorResult IsSuperpalindrome(int termToCheck)
+        {
+            CalculatorResult calculatorResult;
+            if (IsPalindrome(termToCheck))
+            {
+                int valueToCheck = RaiseToPowerTwo(termToCheck);
+                if (IsPalindrome(valueToCheck))
+                {
+                    calculatorResult = GetCalculatorResult(true, termToCheck, "Is a SuperPalindrome number");
+                }
+                else
+                {
+                    calculatorResult = GetCalculatorResult(true, termToCheck, "Is not a SuperPalindrome number");
+                }
+            }
+            else
+            {
+                calculatorResult = GetCalculatorResult(true, termToCheck, "Is not a SuperPalindrome number");
+            }
+
+            return calculatorResult;
+        }
+
         private static int RaiseToPowerTwo(int termToCheck)
         {
             return (int)Math.Pow(termToCheck, 2);
         }
 
-        private static CalculatorResult ChangeSign(double termToCheck)
+        private static CalculatorResult GetDefaultCalculatorResultWithOpositeSign(double termToCheck)
         {
-            return DisplayDefault((-1) * (termToCheck));
+            return GetDefaultCalculatorResult((-1) * (termToCheck));
         }
 
-        private static CalculatorResult DisplayDefault(double resultValue)
+        private static CalculatorResult GetDefaultCalculatorResult(double resultValue)
         {
-            return CalculatorResult(true, resultValue, "Result");
+            return GetCalculatorResult(true, resultValue, "Result");
         }
 
-        private void DoValidationForDivision(List<double> termsList)
+        private void ValidateTermsForDivision(List<double> termsList)
         {
             _calculatorValidator.ValidateTermsForDivision(termsList);
         }
 
-        private void DoValidationForTwoTermsOperation(List<double> termsList)
+        private void ValidateTermsForMultipleTermsOperation(List<double> termsList)
         {
-            _calculatorValidator.ValidateTwoTermsOperation(termsList);
+            _calculatorValidator.ValidateTermsForMultipleTermsOperation(termsList);
         }
 
-        private List<double> GetTerms()
+        private List<double> GetDoubleTerms()
         {
             return _stringToNumberConverter.ReadTerms<double>(_terms);
         }
 
-        private int GetIntTermToCheck()
+        private int GetIntTerm()
         {
             return _stringToNumberConverter.ReadTerm<int>(_terms);
         }
-        private double GetDoubleTermToCheck()
+        private double GetDoubleTerm()
         {
             return _stringToNumberConverter.ReadTerm<double>(_terms);
         }
@@ -221,7 +237,7 @@ namespace Calculator.Logic
             return termToCheck % 2 == 0;
         }
 
-        private static CalculatorResult CalculatorResult(bool isSuccess, double resultValue, string message)
+        private static CalculatorResult GetCalculatorResult(bool isSuccess, double resultValue, string message)
         {
             return new CalculatorResult
             {
@@ -231,11 +247,13 @@ namespace Calculator.Logic
             };
         }
 
-        private static double DoSpecificTwoTermsAction(List<double> termsList, Func<double, double, double> action)
+        private double GetValidationAndActionResultForTerms(Action<List<double>> validationMethod, Func<double, double, double> operation)
         {
-            var result = termsList.First();
-            termsList.Skip(1).ToList().ForEach(x => { result = action(result, x); });
-            return result;
+            var termsList = GetDoubleTerms();
+            validationMethod(termsList);
+            var resultValue = termsList.First();
+            termsList.Skip(1).ToList().ForEach(x => { resultValue = operation (resultValue, x); });
+            return resultValue;
         }
 
         private static bool IsPrime(int valueToCheck)
@@ -270,20 +288,19 @@ namespace Calculator.Logic
             return isPalindrom;
         }
 
-        private static int Reverse(int a)
+        private static int Reverse(int number)
         {
-            int oglindit = 0;
+            int reversedNumber = 0;
             int reminder;
-            int numar = a;
 
-            while (numar > 0)
+            while (number > 0)
             {
-                reminder = numar % 10;
-                oglindit = oglindit * 10 + reminder;
-                numar /= 10;
+                reminder = number % 10;
+                reversedNumber = reversedNumber * 10 + reminder;
+                number /= 10;
             }
 
-            return oglindit;
+            return reversedNumber;
         }
         public void SetCurrentOperation(Operation operation)
         {
@@ -310,7 +327,7 @@ namespace Calculator.Logic
             _terms.Add(term);
         }
 
-        public void AddLastTermUsed(string term)
+        public void AddLastTermUsed()
         {
             _terms.Add(_lastTerm);
         }

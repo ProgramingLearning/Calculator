@@ -152,7 +152,7 @@ namespace Calculator
 
         private void btn_SuperPalindrome_Click(object sender, EventArgs e)
         {
-            PerformSingleTermOperationWithoutUsingResultButton(Operation.Superpalindrome);
+            PerformSingleTermOperationWithoutUsingResultButton(Operation.IsSuperpalindrome);
         }
 
         private void btn_AbsoluteValue_Click(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace Calculator
 
         private void btn_Palindrome_Click(object sender, EventArgs e)
         {
-            PerformSingleTermOperationWithoutUsingResultButton(Operation.Palindrome);
+            PerformSingleTermOperationWithoutUsingResultButton(Operation.IsPalindrome);
         }
 
         private void btn_Square_Click(object sender, EventArgs e)
@@ -190,7 +190,7 @@ namespace Calculator
             AddNewTermToTheList();
             isOperationButtonPressed = true;
             _calculatorLogic.SetCurrentOperation(operationSelected);
-            var result = _calculatorLogic.DoCalculation();
+            var result = _calculatorLogic.DoSingleTermOperation();
             DisplayCalculatorResult(result);
         }
 

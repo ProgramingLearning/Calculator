@@ -17,17 +17,15 @@ namespace Calculator.Logic
 
         public void ValidateTermsForDivision(List<double> terms)
         {
-            if (terms.Count < 2)
-            {
-                throw new CalculatorException(Error.ToFewTerms);
-            }
+            ValidateTermsForMultipleTermsOperation(terms);
+
             if (terms.Skip(1).Any(x => x == 0))
             {
                 throw new CalculatorException(Error.DivideBy0);
             }
         }
 
-        public void ValidateTwoTermsOperation(List<double> terms)
+        public void ValidateTermsForMultipleTermsOperation(List<double> terms)
         {
             if (terms.Count < 2)
             {
