@@ -51,6 +51,24 @@
                         };
                     }
 
+                case Error.ZeroCantBeNegativeOrPositive:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "Zero can´t be negative or positive"
+                        };
+                    }
+
+                case Error.TypeOfDateNotImplemented:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "Type of date not implemented"
+                        };
+                    }
+
                 default:
                     break;
             }

@@ -7,6 +7,8 @@
         NoOperationSelected = 2,
         IsNotAnInteger = 3,
         ToFewTerms = 4,
-        IsNotADouble= 5
+        IsNotADouble= 5,
+        ZeroCantBeNegativeOrPositive = 6,
+        TypeOfDateNotImplemented = 7
     }
 }

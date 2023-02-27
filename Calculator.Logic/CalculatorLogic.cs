@@ -20,7 +20,7 @@ namespace Calculator.Logic
             _stringToNumberConverter = stringToNumberConverter;
             _terms = new List<string>();
         }
-       
+
         public CalculatorResult DoMultipleTermOperation()
         {
             if (ShouldRepeatLastOperation(_currentOperation))
@@ -56,31 +56,30 @@ namespace Calculator.Logic
             {
                 case Operation.Sum:
                     {
-                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x + y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x + y; }));
                         break;
                     }
                 case Operation.Subtract:
                     {
-                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; });
+                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; });
                         calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Multiply:
                     {
-                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; });
+                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; });
                         calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Divide:
                     {
-                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; });
+                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; });
                         calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
                 case Operation.Power:
                     {
-                        double resultValue = GetValidationAndActionResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); });
+                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); });
                         calculatorResult = GetDefaultCalculatorResult(resultValue);
                         break;
                     }
@@ -200,7 +199,11 @@ namespace Calculator.Logic
 
         private static CalculatorResult GetDefaultCalculatorResultWithOpositeSign(double termToCheck)
         {
-            return GetDefaultCalculatorResult((-1) * (termToCheck));
+            if(termToCheck==0)
+            {
+                throw new CalculatorException(Error.ZeroCantBeNegativeOrPositive);
+            }
+                return GetDefaultCalculatorResult((-1) * (termToCheck));
         }
 
         private static CalculatorResult GetDefaultCalculatorResult(double resultValue)
@@ -247,18 +250,18 @@ namespace Calculator.Logic
             };
         }
 
-        private double GetValidationAndActionResultForTerms(Action<List<double>> validationMethod, Func<double, double, double> operation)
+        private double ValidateAndGetOperationResultForTerms(Action<List<double>> validationMethod, Func<double, double, double> operationMethod)
         {
             var termsList = GetDoubleTerms();
             validationMethod(termsList);
             var resultValue = termsList.First();
-            termsList.Skip(1).ToList().ForEach(x => { resultValue = operation (resultValue, x); });
+            termsList.Skip(1).ToList().ForEach(x => { resultValue = operationMethod(resultValue, x); });
             return resultValue;
         }
 
         private static bool IsPrime(int valueToCheck)
         {
-            if (valueToCheck == 1 || valueToCheck == 0)
+            if (valueToCheck < 1 || valueToCheck == 1 || valueToCheck == 0)
             {
                 return false;
             }

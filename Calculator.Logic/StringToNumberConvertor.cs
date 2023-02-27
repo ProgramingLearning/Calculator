@@ -35,7 +35,7 @@ namespace Calculator.Logic
             {
                 return ConvertToInteger(valueToConvert);
             }
-            return default;
+            throw new CalculatorException(Error.TypeOfDateNotImplemented);
         }
 
         private static double ConvertToDouble(string valueToConvert)
