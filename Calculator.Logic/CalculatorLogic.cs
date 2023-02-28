@@ -199,11 +199,11 @@ namespace Calculator.Logic
 
         private static CalculatorResult GetDefaultCalculatorResultWithOpositeSign(double termToCheck)
         {
-            if(termToCheck==0)
+            if (termToCheck == 0)
             {
                 throw new CalculatorException(Error.ZeroCantBeNegativeOrPositive);
             }
-                return GetDefaultCalculatorResult((-1) * (termToCheck));
+            return GetDefaultCalculatorResult((-1) * (termToCheck));
         }
 
         private static CalculatorResult GetDefaultCalculatorResult(double resultValue)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Calculator.Logic
 {
@@ -25,6 +22,7 @@ namespace Calculator.Logic
             }
             return result;
         }
+
         private static object ConvertStringToType<T>(string valueToConvert)
         {
             if (typeof(T) == typeof(double))

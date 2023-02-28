@@ -1,9 +1,7 @@
 ﻿namespace Calculator.Logic
 {
-
     public class CalculatorError: ICalculatorError
     {
-
         public CalculatorResult HandleCalculatorException(CalculatorException ex)
         {
             switch (ex.ErrorType)
@@ -72,6 +70,7 @@
                 default:
                     break;
             }
+
             return new CalculatorResult();
         }
     }

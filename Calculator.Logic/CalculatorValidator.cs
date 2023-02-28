@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Calculator.Logic
 {
-    public class CalculatorValidator: ICalculatorValidator
+    public class CalculatorValidator : ICalculatorValidator
     {
         public void ValidateOperation(Operation operation)
         {
