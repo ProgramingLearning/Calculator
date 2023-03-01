@@ -8,7 +8,7 @@ namespace Calculator.Logic
     {
         public void ValidateOperation(Operation operation)
         {
-            if (operation == Operation.None)
+            if (operation == Operation.None)                                
             {
                 throw new CalculatorException(Error.None);
             }

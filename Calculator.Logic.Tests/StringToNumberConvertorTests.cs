@@ -39,5 +39,15 @@ namespace Calculator.Logic.Tests
             //Assert
             Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<float>(termsList));
         }
+
+        [TestMethod]
+        public void ReadTerms_WhenTermsListIsEmpty_AddTerms_ReturnsListWithTerms()
+        {
+            //Arrange
+
+            //Act
+
+            //Assert
+        }
     }
 }
