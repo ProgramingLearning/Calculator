@@ -314,46 +314,21 @@ namespace Calculator
                     }
                 case Operation.MirroredNumber:
                     {
-                        uint resultValue = 0;
-                        uint number = Convert.ToUInt32(firstTerm);
-                        while (number != 0)
+                        if (IsNaturalNumber(firstTerm))
                         {
-                            resultValue = resultValue * 10 + number % 10;
-                            number /= 10;
+                            uint number = Convert.ToUInt32(firstTerm);
+                            resultValue = GetMirroredNumber(number);
+                            textbox_result.Text = $"The mirrored number is {resultValue}";
                         }
-                        lbl_title.Text = $"The mirrored number is {resultValue}";
+                        else
+                        {
+                            textbox_result.Text = "Please enter a natural number.";
+                        }
                         break;
                     }
                 case Operation.IsPrime:
                     {
-                        IsNaturalNumber(firstTerm);
-                        if (IsNaturalNumber(firstTerm))
-                        {
-                            uint convertedFirstTerm = Convert.ToUInt32(firstTerm);
-                            if (convertedFirstTerm <= 1)
-                            {
-                                lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
-                            }
-                            else
-                            {
-                                for (double divisor = 2; divisor <= Math.Sqrt(convertedFirstTerm); divisor++)
-                                {
-                                    if (convertedFirstTerm % divisor == 0)
-                                    {
-                                        lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        lbl_title.Text = $"{convertedFirstTerm} is  a prime number.";
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            lbl_title.Text = $" {firstTerm} is not a natural number.";
-                        }
+                        ExecuteIsPrimeOperation();
                         break;
                     }
                 case Operation.PalindromeSuperPalindrome:
@@ -365,17 +340,17 @@ namespace Calculator
                         {
                             if (numberraisedtopower == mirrored2)
                             {
-                                lbl_title.Text = $"{firstTerm} is a superpalindrome.";
+                                textbox_result.Text = $"{firstTerm} is a superpalindrome.";
                             }
                             else
                             {
-                                lbl_title.Text = $"{firstTerm} is a palindrome.";
+                                textbox_result.Text = $"{firstTerm} is a palindrome.";
 
                             }
                         }
                         else
                         {
-                            lbl_title.Text = $"{firstTerm} is not a palindrome.";
+                            textbox_result.Text = $"{firstTerm} is not a palindrome.";
                         }
                         break;
                     }
@@ -399,7 +374,7 @@ namespace Calculator
                             }
                         }
 
-                        lbl_title.Text = $"CMMMC between {number1} and {number2} is {number2Aux}.";
+                        textbox_result.Text = $"LCM between {number1} and {number2} is {number2Aux}.";
                         break;
                     }
                 case Operation.BiggestCommunalDivisor:
@@ -421,10 +396,64 @@ namespace Calculator
                                 number2Aux -= number1Aux;
                             }
                         }
-                        lbl_title.Text = $"CMMDC between {number1} and {number2} is {number2Aux}.";
+                        textbox_result.Text = $"BCD between {number1} and {number2} is {number2Aux}.";
                         break;
                     }
             }
+        }
+
+        private uint GetMirroredNumber(uint number)
+        {
+            uint mirrored = 0;
+            while (number != 0)
+            {
+                mirrored = mirrored * 10 + number % 10;
+                number /= 10;
+            }
+            return mirrored;
+        }
+
+        private void ExecuteIsPrimeOperation()
+        {
+            if (IsNaturalNumber(firstTerm))
+            {
+                uint convertedFirstTerm = Convert.ToUInt32(firstTerm);
+                if (convertedFirstTerm <= 1)
+                {
+                    textbox_result.Text = $"{convertedFirstTerm} is not a prime number.";
+                }
+                else if (convertedFirstTerm == 2)
+                {
+                    textbox_result.Text = $"{convertedFirstTerm} is  a prime number.";
+                }
+                else
+                {
+                    if (HasDivisors(convertedFirstTerm))
+                    {
+                        textbox_result.Text = $"{convertedFirstTerm} is  a prime number.";
+                    }
+                    else
+                    {
+                        textbox_result.Text = $"{convertedFirstTerm} is not a prime number.";
+                    }
+                }
+            }
+            else
+            {
+                textbox_result.Text = $" {firstTerm} is not a natural number.";
+            }
+        }
+
+        private static bool HasDivisors(uint convertedFirstTerm)
+        {
+            for (double divisor = 2; divisor <= Math.Sqrt(convertedFirstTerm); divisor++)
+            {
+                if (convertedFirstTerm % divisor == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void ValidateSecondTermForDivision()
@@ -518,6 +547,30 @@ namespace Calculator
             operationPerformed = Operation.BiggestCommunalDivisor;
             lbl_title.Text = "BiggestCommunalDivisor";
         }
+        public uint GetPositiveWholeNumber()
+        {
+            if (uint.TryParse(textbox_result.Text, out uint result))
+            {
+                return result;
+            }
+            else
+            {
+                return GetPositiveWholeNumber();
+            }
+        }
+
+
+        private void SetLabelTitleTextBasedOnFirstTermParity()
+        {
+            if (firstTerm % 2 == 0)
+            {
+                textbox_result.Text = "The number is even.";
+            }
+            else
+            {
+                textbox_result.Text = "The number is odd.";
+            }
+        }
         private bool IsNaturalNumber(double value)
         {
             if (Math.Floor(value) == value)
@@ -531,16 +584,14 @@ namespace Calculator
 
         }
 
-        private void SetLabelTitleTextBasedOnFirstTermParity()
+        private void textbox_result_TextChanged(object sender, EventArgs e)
         {
-            if (firstTerm % 2 == 0)
-            {
-                lbl_title.Text = "The number is even.";
-            }
-            else
-            {
-                lbl_title.Text = "The number is odd.";
-            }
+
+        }
+
+        private void lbl_title_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -52,12 +52,12 @@ namespace Calculator
             this.textbox_result = new System.Windows.Forms.TextBox();
             this.btn_SquareRoot = new System.Windows.Forms.Button();
             this.btn_RaiseNumberToPower = new System.Windows.Forms.Button();
-            this.btn_NumberParity = new System.Windows.Forms.Button();
             this.btn_MirroredNumber = new System.Windows.Forms.Button();
             this.btn_IsPrime = new System.Windows.Forms.Button();
             this.btn_PalindromeSuperPalindrome = new System.Windows.Forms.Button();
             this.btn_LeastCommonMultiple = new System.Windows.Forms.Button();
             this.btn_BiggestCommunalDivisor = new System.Windows.Forms.Button();
+            this.btn_NumberParity = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_4
@@ -75,7 +75,7 @@ namespace Calculator
             // btn_clear
             // 
             this.btn_clear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_clear.Location = new System.Drawing.Point(369, 140);
+            this.btn_clear.Location = new System.Drawing.Point(344, 140);
             this.btn_clear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(39, 34);
@@ -147,7 +147,7 @@ namespace Calculator
             // btn_substract
             // 
             this.btn_substract.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_substract.Location = new System.Drawing.Point(167, 184);
+            this.btn_substract.Location = new System.Drawing.Point(167, 229);
             this.btn_substract.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_substract.Name = "btn_substract";
             this.btn_substract.Size = new System.Drawing.Size(39, 34);
@@ -159,7 +159,7 @@ namespace Calculator
             // btn_result
             // 
             this.btn_result.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_result.Location = new System.Drawing.Point(369, 184);
+            this.btn_result.Location = new System.Drawing.Point(346, 184);
             this.btn_result.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_result.Name = "btn_result";
             this.btn_result.Size = new System.Drawing.Size(39, 79);
@@ -183,7 +183,7 @@ namespace Calculator
             // btn_point
             // 
             this.btn_point.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_point.Location = new System.Drawing.Point(112, 229);
+            this.btn_point.Location = new System.Drawing.Point(62, 229);
             this.btn_point.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_point.Name = "btn_point";
             this.btn_point.Size = new System.Drawing.Size(39, 34);
@@ -195,7 +195,7 @@ namespace Calculator
             // btn_sum
             // 
             this.btn_sum.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_sum.Location = new System.Drawing.Point(165, 229);
+            this.btn_sum.Location = new System.Drawing.Point(114, 229);
             this.btn_sum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_sum.Name = "btn_sum";
             this.btn_sum.Size = new System.Drawing.Size(39, 34);
@@ -210,7 +210,7 @@ namespace Calculator
             this.btn_0.Location = new System.Drawing.Point(9, 229);
             this.btn_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_0.Name = "btn_0";
-            this.btn_0.Size = new System.Drawing.Size(92, 34);
+            this.btn_0.Size = new System.Drawing.Size(40, 34);
             this.btn_0.TabIndex = 19;
             this.btn_0.Text = "0";
             this.btn_0.UseVisualStyleBackColor = true;
@@ -255,7 +255,7 @@ namespace Calculator
             // btn_CE
             // 
             this.btn_CE.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_CE.Location = new System.Drawing.Point(369, 94);
+            this.btn_CE.Location = new System.Drawing.Point(344, 94);
             this.btn_CE.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_CE.Name = "btn_CE";
             this.btn_CE.Size = new System.Drawing.Size(39, 34);
@@ -281,11 +281,12 @@ namespace Calculator
             this.lbl_title.AutoSize = true;
             this.lbl_title.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lbl_title.Font = new System.Drawing.Font("Tahoma", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl_title.Location = new System.Drawing.Point(9, 26);
+            this.lbl_title.Location = new System.Drawing.Point(12, 22);
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(85, 18);
             this.lbl_title.TabIndex = 29;
             this.lbl_title.Text = "Calculator";
+            this.lbl_title.Click += new System.EventHandler(this.lbl_title_Click);
             // 
             // textbox_result
             // 
@@ -293,15 +294,16 @@ namespace Calculator
             this.textbox_result.Location = new System.Drawing.Point(10, 53);
             this.textbox_result.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textbox_result.Name = "textbox_result";
-            this.textbox_result.Size = new System.Drawing.Size(251, 30);
+            this.textbox_result.Size = new System.Drawing.Size(373, 30);
             this.textbox_result.TabIndex = 30;
             this.textbox_result.Text = "0";
             this.textbox_result.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textbox_result.TextChanged += new System.EventHandler(this.textbox_result_TextChanged);
             // 
             // btn_SquareRoot
             // 
             this.btn_SquareRoot.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_SquareRoot.Location = new System.Drawing.Point(267, 94);
+            this.btn_SquareRoot.Location = new System.Drawing.Point(222, 184);
             this.btn_SquareRoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_SquareRoot.Name = "btn_SquareRoot";
             this.btn_SquareRoot.Size = new System.Drawing.Size(39, 34);
@@ -313,7 +315,7 @@ namespace Calculator
             // btn_RaiseNumberToPower
             // 
             this.btn_RaiseNumberToPower.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_RaiseNumberToPower.Location = new System.Drawing.Point(222, 94);
+            this.btn_RaiseNumberToPower.Location = new System.Drawing.Point(167, 184);
             this.btn_RaiseNumberToPower.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_RaiseNumberToPower.Name = "btn_RaiseNumberToPower";
             this.btn_RaiseNumberToPower.Size = new System.Drawing.Size(39, 34);
@@ -322,22 +324,10 @@ namespace Calculator
             this.btn_RaiseNumberToPower.UseVisualStyleBackColor = true;
             this.btn_RaiseNumberToPower.Click += new System.EventHandler(this.btn_RaiseNumberToPower_Click);
             // 
-            // btn_NumberParity
-            // 
-            this.btn_NumberParity.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_NumberParity.Location = new System.Drawing.Point(219, 229);
-            this.btn_NumberParity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_NumberParity.Name = "btn_NumberParity";
-            this.btn_NumberParity.Size = new System.Drawing.Size(63, 34);
-            this.btn_NumberParity.TabIndex = 33;
-            this.btn_NumberParity.Text = "Number Parity";
-            this.btn_NumberParity.UseVisualStyleBackColor = true;
-            this.btn_NumberParity.Click += new System.EventHandler(this.btn_NumberParity_Click);
-            // 
             // btn_MirroredNumber
             // 
             this.btn_MirroredNumber.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_MirroredNumber.Location = new System.Drawing.Point(221, 184);
+            this.btn_MirroredNumber.Location = new System.Drawing.Point(277, 184);
             this.btn_MirroredNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_MirroredNumber.Name = "btn_MirroredNumber";
             this.btn_MirroredNumber.Size = new System.Drawing.Size(63, 34);
@@ -349,7 +339,7 @@ namespace Calculator
             // btn_IsPrime
             // 
             this.btn_IsPrime.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_IsPrime.Location = new System.Drawing.Point(221, 140);
+            this.btn_IsPrime.Location = new System.Drawing.Point(277, 140);
             this.btn_IsPrime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_IsPrime.Name = "btn_IsPrime";
             this.btn_IsPrime.Size = new System.Drawing.Size(61, 34);
@@ -361,44 +351,56 @@ namespace Calculator
             // btn_PalindromeSuperPalindrome
             // 
             this.btn_PalindromeSuperPalindrome.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_PalindromeSuperPalindrome.Location = new System.Drawing.Point(288, 140);
+            this.btn_PalindromeSuperPalindrome.Location = new System.Drawing.Point(221, 94);
             this.btn_PalindromeSuperPalindrome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_PalindromeSuperPalindrome.Name = "btn_PalindromeSuperPalindrome";
-            this.btn_PalindromeSuperPalindrome.Size = new System.Drawing.Size(76, 34);
+            this.btn_PalindromeSuperPalindrome.Size = new System.Drawing.Size(117, 34);
             this.btn_PalindromeSuperPalindrome.TabIndex = 36;
-            this.btn_PalindromeSuperPalindrome.Text = "PalindromeSuperPalindrome";
+            this.btn_PalindromeSuperPalindrome.Text = "Palindrome/ SuperPalindrome";
             this.btn_PalindromeSuperPalindrome.UseVisualStyleBackColor = true;
             this.btn_PalindromeSuperPalindrome.Click += new System.EventHandler(this.btn_PalindromeSuperPalindrome_Click);
             // 
             // btn_LeastCommonMultiple
             // 
             this.btn_LeastCommonMultiple.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_LeastCommonMultiple.Location = new System.Drawing.Point(287, 184);
+            this.btn_LeastCommonMultiple.Location = new System.Drawing.Point(222, 140);
             this.btn_LeastCommonMultiple.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_LeastCommonMultiple.Name = "btn_LeastCommonMultiple";
-            this.btn_LeastCommonMultiple.Size = new System.Drawing.Size(76, 34);
+            this.btn_LeastCommonMultiple.Size = new System.Drawing.Size(40, 34);
             this.btn_LeastCommonMultiple.TabIndex = 37;
-            this.btn_LeastCommonMultiple.Text = "CMMMC";
+            this.btn_LeastCommonMultiple.Text = "LCM";
             this.btn_LeastCommonMultiple.UseVisualStyleBackColor = true;
             this.btn_LeastCommonMultiple.Click += new System.EventHandler(this.btn_LeastCommonMultiple_Click);
             // 
             // btn_BiggestCommunalDivisor
             // 
             this.btn_BiggestCommunalDivisor.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_BiggestCommunalDivisor.Location = new System.Drawing.Point(287, 229);
+            this.btn_BiggestCommunalDivisor.Location = new System.Drawing.Point(221, 229);
             this.btn_BiggestCommunalDivisor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_BiggestCommunalDivisor.Name = "btn_BiggestCommunalDivisor";
-            this.btn_BiggestCommunalDivisor.Size = new System.Drawing.Size(76, 34);
+            this.btn_BiggestCommunalDivisor.Size = new System.Drawing.Size(40, 34);
             this.btn_BiggestCommunalDivisor.TabIndex = 38;
-            this.btn_BiggestCommunalDivisor.Text = "CMMDC";
+            this.btn_BiggestCommunalDivisor.Text = "BCD";
             this.btn_BiggestCommunalDivisor.UseVisualStyleBackColor = true;
             this.btn_BiggestCommunalDivisor.Click += new System.EventHandler(this.btn_BiggestCommunalDivisor_Click);
+            // 
+            // btn_NumberParity
+            // 
+            this.btn_NumberParity.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_NumberParity.Location = new System.Drawing.Point(277, 229);
+            this.btn_NumberParity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_NumberParity.Name = "btn_NumberParity";
+            this.btn_NumberParity.Size = new System.Drawing.Size(63, 34);
+            this.btn_NumberParity.TabIndex = 33;
+            this.btn_NumberParity.Text = "Even/ Odd";
+            this.btn_NumberParity.UseVisualStyleBackColor = true;
+            this.btn_NumberParity.Click += new System.EventHandler(this.btn_NumberParity_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 278);
+            this.ClientSize = new System.Drawing.Size(405, 277);
             this.Controls.Add(this.btn_BiggestCommunalDivisor);
             this.Controls.Add(this.btn_LeastCommonMultiple);
             this.Controls.Add(this.btn_PalindromeSuperPalindrome);
@@ -462,12 +464,12 @@ namespace Calculator
         private System.Windows.Forms.TextBox textbox_result;
         private System.Windows.Forms.Button btn_SquareRoot;
         private System.Windows.Forms.Button btn_RaiseNumberToPower;
-        private System.Windows.Forms.Button btn_NumberParity;
         private System.Windows.Forms.Button btn_MirroredNumber;
         private System.Windows.Forms.Button btn_IsPrime;
         private System.Windows.Forms.Button btn_PalindromeSuperPalindrome;
         private System.Windows.Forms.Button btn_LeastCommonMultiple;
         private System.Windows.Forms.Button btn_BiggestCommunalDivisor;
+        private System.Windows.Forms.Button btn_NumberParity;
     }
 }
 
