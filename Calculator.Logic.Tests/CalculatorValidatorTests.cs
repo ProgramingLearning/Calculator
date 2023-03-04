@@ -47,5 +47,16 @@ namespace Calculator.Logic.Tests
             //Assert
             Assert.ThrowsException<CalculatorException>(() => _sut.ValidateTermsForDivision(terms));
         }
+
+        [TestMethod]
+        public void ValidateTermsForDivision_WhenAreLessThanTwoTerms_ThrowsCalculatorException()
+        {
+            //Arrange
+            var terms = new List<double>() {1};
+
+            //Act
+            //Assert
+            Assert.ThrowsException<CalculatorException>(() => _sut.ValidateTermsForDivision(terms));
+        }
     }
 }

@@ -67,6 +67,15 @@
                         };
                     }
 
+                case Error.NoTermSelected:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "No term selected"
+                        };
+                    }
+
                 default:
                     break;
             }

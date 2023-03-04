@@ -9,6 +9,7 @@
         ToFewTerms = 4,
         IsNotADouble= 5,
         ZeroCantBeNegativeOrPositive = 6,
-        TypeOfDateNotImplemented = 7
+        TypeOfDateNotImplemented = 7,
+        NoTermSelected = 8
     }
 }

@@ -61,26 +61,22 @@ namespace Calculator.Logic
                     }
                 case Operation.Subtract:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; }));
                         break;
                     }
                 case Operation.Multiply:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; }));
                         break;
                     }
                 case Operation.Divide:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; }));
                         break;
                     }
                 case Operation.Power:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); }));
                         break;
                     }
                 case Operation.IsPrime:
