@@ -9,6 +9,7 @@ namespace Calculator
     {
         List<string> terms = new List<string>();
         string firstTerm;
+
         string secondTerm;
         double resultValue;
         Operation operationButtonPressed = Operation.None;
