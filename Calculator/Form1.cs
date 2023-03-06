@@ -13,6 +13,7 @@ namespace Calculator
     public partial class Form1 : Form
     {
         double firstTerm;
+        
         double secondTerm;
         double resultValue;
         Operation operationPerformed = Operation.None;
