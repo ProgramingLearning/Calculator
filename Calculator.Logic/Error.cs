@@ -10,6 +10,7 @@
         IsNotADouble= 5,
         ZeroCantBeNegativeOrPositive = 6,
         TypeOfDateNotImplemented = 7,
-        NoTermSelected = 8
+        NoTermSelected = 8,
+        IsNotAPositiveInteger=9
     }
 }

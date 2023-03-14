@@ -257,7 +257,11 @@ namespace Calculator.Logic
 
         private static bool IsPrime(int valueToCheck)
         {
-            if (valueToCheck < 1 || valueToCheck == 1 || valueToCheck == 0)
+            if (valueToCheck<0)
+            {
+            throw new CalculatorException(Error.IsNotAPositiveInteger);
+            }
+            if (valueToCheck == 1 || valueToCheck == 0)
             {
                 return false;
             }

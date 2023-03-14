@@ -75,6 +75,14 @@
                             Message = "No term selected"
                         };
                     }
+                case Error.IsNotAPositiveInteger:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "The number is not a Positive Integer"
+                        };
+                    }
 
                 default:
                     break;
