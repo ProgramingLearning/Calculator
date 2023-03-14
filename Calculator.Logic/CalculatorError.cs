@@ -1,9 +1,7 @@
 ﻿namespace Calculator.Logic
 {
-
     public class CalculatorError: ICalculatorError
     {
-
         public CalculatorResult HandleCalculatorException(CalculatorException ex)
         {
             switch (ex.ErrorType)
@@ -69,9 +67,27 @@
                         };
                     }
 
+                case Error.NoTermSelected:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "No term selected"
+                        };
+                    }
+                case Error.IsNotAPositiveInteger:
+                    {
+                        return new CalculatorResult
+                        {
+                            IsSuccess = false,
+                            Message = "The number is not a Positive Integer"
+                        };
+                    }
+
                 default:
                     break;
             }
+
             return new CalculatorResult();
         }
     }
