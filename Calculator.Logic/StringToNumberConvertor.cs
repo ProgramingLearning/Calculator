@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace Calculator.Logic
 {
@@ -18,13 +15,18 @@ namespace Calculator.Logic
 
         public List<T> ReadTerms<T>(List<string> input)
         {
-            var result = new List<T>();
-            for (int i = 0; i < input.Count; i++)
+            if (input.Count > 0)
             {
-                result.Add((T)ConvertStringToType<T>(input[i]));
+                var result = new List<T>();
+                for (int i = 0; i < input.Count; i++)
+                {
+                    result.Add((T)ConvertStringToType<T>(input[i]));
+                }
+                return result;
             }
-            return result;
+            throw new CalculatorException(Error.NoTermSelected);
         }
+         
         private static object ConvertStringToType<T>(string valueToConvert)
         {
             if (typeof(T) == typeof(double))

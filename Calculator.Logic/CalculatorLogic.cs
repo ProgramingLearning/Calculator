@@ -61,26 +61,22 @@ namespace Calculator.Logic
                     }
                 case Operation.Subtract:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; }));
                         break;
                     }
                 case Operation.Multiply:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x * y; }));
                         break;
                     }
                 case Operation.Divide:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; }));
                         break;
                     }
                 case Operation.Power:
                     {
-                        double resultValue = ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); });
-                        calculatorResult = GetDefaultCalculatorResult(resultValue);
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return Math.Pow(x, y); }));
                         break;
                     }
                 case Operation.IsPrime:
@@ -199,11 +195,11 @@ namespace Calculator.Logic
 
         private static CalculatorResult GetDefaultCalculatorResultWithOpositeSign(double termToCheck)
         {
-            if(termToCheck==0)
+            if (termToCheck == 0)
             {
                 throw new CalculatorException(Error.ZeroCantBeNegativeOrPositive);
             }
-                return GetDefaultCalculatorResult((-1) * (termToCheck));
+            return GetDefaultCalculatorResult((-1) * (termToCheck));
         }
 
         private static CalculatorResult GetDefaultCalculatorResult(double resultValue)
@@ -261,7 +257,11 @@ namespace Calculator.Logic
 
         private static bool IsPrime(int valueToCheck)
         {
-            if (valueToCheck < 1 || valueToCheck == 1 || valueToCheck == 0)
+            if (valueToCheck<0)
+            {
+            throw new CalculatorException(Error.IsNotAPositiveInteger);
+            }
+            if (valueToCheck == 1 || valueToCheck == 0)
             {
                 return false;
             }
