@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Calculator.Logic;
 using System.Linq;
+using Calculator.Domain.Request;
+using Calculator.Domain.Response;
 
 namespace Calculator
 {

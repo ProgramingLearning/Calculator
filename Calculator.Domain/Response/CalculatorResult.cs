@@ -1,4 +1,4 @@
-﻿namespace Calculator.Logic
+﻿namespace Calculator.Domain.Response
 {
     public class CalculatorResult
     {
