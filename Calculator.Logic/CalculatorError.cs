@@ -1,4 +1,6 @@
-﻿namespace Calculator.Logic
+﻿using Calculator.Domain.Response;
+
+namespace Calculator.Logic.Errors
 {
     public class CalculatorError: ICalculatorError
     {

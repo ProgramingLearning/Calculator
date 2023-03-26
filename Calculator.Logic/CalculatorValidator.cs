@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Calculator.Domain.Request;
+using Calculator.Logic.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
