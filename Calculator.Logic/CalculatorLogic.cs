@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Calculator.Domain.Request;
+using Calculator.Domain.Response;
+using Calculator.Logic.Errors;
 
 namespace Calculator.Logic
 {
@@ -9,8 +12,7 @@ namespace Calculator.Logic
         private ICalculatorError _calculatorError;
         private ICalculatorValidator _calculatorValidator;
         private IStringToNumberConvertor _stringToNumberConverter;
-        private List<string> _terms;
-        private Operation _currentOperation;
+        private CalculatorState _calculatorState;
         private string _lastTerm;
 
         public CalculatorLogic(ICalculatorError calculatorError, ICalculatorValidator calculatorValidator, IStringToNumberConvertor stringToNumberConverter)
@@ -18,12 +20,12 @@ namespace Calculator.Logic
             _calculatorError = calculatorError;
             _calculatorValidator = calculatorValidator;
             _stringToNumberConverter = stringToNumberConverter;
-            _terms = new List<string>();
+            _calculatorState = new CalculatorState();
         }
 
         public CalculatorResult DoMultipleTermOperation()
         {
-            if (ShouldRepeatLastOperation(_currentOperation))
+            if (ShouldRepeatLastOperation(_calculatorState.CurrentOperation))
             {
                 AddLastTermUsed();
             }
@@ -49,10 +51,10 @@ namespace Calculator.Logic
 
         private CalculatorResult DoCalculation()
         {
-            _lastTerm = _terms.LastOrDefault();
-            _calculatorValidator.ValidateOperation(_currentOperation);
+            _lastTerm = _calculatorState.Terms.LastOrDefault();
+            _calculatorValidator.ValidateOperation(_calculatorState.CurrentOperation);
             CalculatorResult calculatorResult = null;
-            switch (_currentOperation)
+            switch (_calculatorState.CurrentOperation)
             {
                 case Operation.Sum:
                     {
@@ -61,7 +63,7 @@ namespace Calculator.Logic
                     }
                 case Operation.Subtract:
                     {
-                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; }));
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForMultipleTermsOperation, (x, y) => { return x - y; }));
                         break;
                     }
                 case Operation.Multiply:
@@ -71,7 +73,7 @@ namespace Calculator.Logic
                     }
                 case Operation.Divide:
                     {
-                         calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; }));
+                        calculatorResult = GetDefaultCalculatorResult(ValidateAndGetOperationResultForTerms(ValidateTermsForDivision, (x, y) => { return x / y; }));
                         break;
                     }
                 case Operation.Power:
@@ -219,16 +221,16 @@ namespace Calculator.Logic
 
         private List<double> GetDoubleTerms()
         {
-            return _stringToNumberConverter.ReadTerms<double>(_terms);
+            return _stringToNumberConverter.ReadTerms<double>(_calculatorState.Terms);
         }
 
         private int GetIntTerm()
         {
-            return _stringToNumberConverter.ReadTerm<int>(_terms);
+            return _stringToNumberConverter.ReadTerm<int>(_calculatorState.Terms);
         }
         private double GetDoubleTerm()
         {
-            return _stringToNumberConverter.ReadTerm<double>(_terms);
+            return _stringToNumberConverter.ReadTerm<double>(_calculatorState.Terms);
         }
 
         private static bool IsEven(int termToCheck)
@@ -257,9 +259,9 @@ namespace Calculator.Logic
 
         private static bool IsPrime(int valueToCheck)
         {
-            if (valueToCheck<0)
+            if (valueToCheck < 0)
             {
-            throw new CalculatorException(Error.IsNotAPositiveInteger);
+                throw new CalculatorException(Error.IsNotAPositiveInteger);
             }
             if (valueToCheck == 1 || valueToCheck == 0)
             {
@@ -293,6 +295,7 @@ namespace Calculator.Logic
 
         private static int Reverse(int number)
         {
+
             int reversedNumber = 0;
             int reminder;
 
@@ -307,37 +310,46 @@ namespace Calculator.Logic
         }
         public void SetCurrentOperation(Operation operation)
         {
-            _currentOperation = operation;
+            _calculatorState.CurrentOperation = operation;
         }
 
         public Operation GetCurrentOperation()
         {
-            return _currentOperation;
+            return _calculatorState.CurrentOperation;
         }
 
         public bool ShouldPerformOperationForCurrentTerms(Operation newOperation)
         {
-            return newOperation != _currentOperation && _terms.Count > 1;
+            return newOperation != _calculatorState.CurrentOperation && _calculatorState.Terms.Count > 1;
         }
 
         public bool ShouldRepeatLastOperation(Operation newOperation)
         {
-            return newOperation == _currentOperation && _terms.Count == 1;
+            return newOperation == _calculatorState.CurrentOperation && _calculatorState.Terms.Count == 1;
         }
 
         public void AddTerm(string term)
         {
-            _terms.Add(term);
+            _calculatorState.Terms.Add(term);
         }
 
         public void AddLastTermUsed()
         {
-            _terms.Add(_lastTerm);
+            _calculatorState.Terms.Add(_lastTerm);
         }
 
         public void ResetTerms()
         {
-            _terms = new List<string>();
+            _calculatorState.Terms = new List<string>();
+        }
+
+        public void SetState(CalculatorState state)
+        {
+            _calculatorState = state;
+        }
+        public CalculatorState GetCalculatorState()
+        {
+            return _calculatorState;
         }
     }
 }

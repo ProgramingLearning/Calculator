@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Calculator.Logic.Errors;
+using System.Collections.Generic;
 
 namespace Calculator.Logic
 {

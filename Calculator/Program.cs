@@ -1,4 +1,5 @@
 using Calculator.Logic;
+using Calculator.Logic.Errors;
 using System;
 using System.Windows.Forms;
 
