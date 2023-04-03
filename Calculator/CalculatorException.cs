@@ -4,9 +4,9 @@ namespace Calculator
 {
     public class CalculatorException : Exception
     {
-        public Error ErrorType { get; set; }
+        public CalculatorExceptionCause ErrorType { get; set; }
 
-        public CalculatorException(Error errorType)
+        public CalculatorException(CalculatorExceptionCause errorType)
         {
             this.ErrorType = errorType;
         }

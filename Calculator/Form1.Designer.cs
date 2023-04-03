@@ -286,7 +286,6 @@ namespace Calculator
             this.lbl_title.Size = new System.Drawing.Size(85, 18);
             this.lbl_title.TabIndex = 29;
             this.lbl_title.Text = "Calculator";
-            this.lbl_title.Click += new System.EventHandler(this.lbl_title_Click);
             // 
             // textbox_result
             // 
@@ -298,7 +297,6 @@ namespace Calculator
             this.textbox_result.TabIndex = 30;
             this.textbox_result.Text = "0";
             this.textbox_result.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textbox_result.TextChanged += new System.EventHandler(this.textbox_result_TextChanged);
             // 
             // btn_SquareRoot
             // 
