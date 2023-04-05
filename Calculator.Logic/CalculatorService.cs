@@ -21,67 +21,46 @@ namespace Calculator.Logic
             var calculatorResponse = new CalculatorResponse();
             var strings = request.ButtonClicked.Split('_').ToList();
 
-            SetTheCalculatorStateIfExists(request);
+            SetTheCalculatorStateIfExistsInRequest(request);
             if (strings != null && strings.Count > 0)
             {
                 _calculatorLogic.AddTerm(strings[0]);
 
                 if (strings[1] == "=")
                 {
-                    DoMultipleTermOperation(calculatorResponse);
+                    calculatorResponse.CalculatorResult = _calculatorLogic.DoMultipleTermOperation();
                 }
                 else
                 {
-                    DoSingleTermOperation(calculatorResponse, strings);
+                    Operation operation = ParseStringToEnumOperation(strings);
+                    _calculatorLogic.SetCurrentOperation(operation);
+                    switch (operation)
+                    {
+                        case Operation.IsPrime:
+                        case Operation.AbsoluteValue:
+                        case Operation.IsOddOrEven:
+                        case Operation.SquareRoot:
+                        case Operation.IsSuperpalindrome:
+                        case Operation.IsPalindrome:
+                        case Operation.Reverse:
+                        case Operation.ChangeSign:
+                            calculatorResponse.CalculatorResult = _calculatorLogic.DoSingleTermOperation();
+                            break;
+                        default:
+                            calculatorResponse.CalculatorState = _calculatorLogic.GetCalculatorState();
+                            break;
+                    }
                 }
             }
             return calculatorResponse;
         }
-
-        private void DoSingleTermOperation(CalculatorResponse calculatorResponse, List<string> strings)
-        {
-            Operation operation = CheckAndSetOperation(strings);
-            switch (operation)
-            {
-                case Operation.IsPrime:
-                case Operation.AbsoluteValue:
-                case Operation.IsOddOrEven:
-                case Operation.SquareRoot:
-                case Operation.IsSuperpalindrome:
-                case Operation.IsPalindrome:
-                case Operation.Reverse:
-                case Operation.ChangeSign:
-                    DoSingleTermOperation(calculatorResponse);
-                    break;
-                default:
-                    GetTheCalculatorState(calculatorResponse);
-                    break;
-            }
-        }
-
-        private Operation CheckAndSetOperation(List<string> strings)
+            private static Operation ParseStringToEnumOperation(List<string> strings)
         {
             var operation = Enum.Parse<Operation>(strings[1]);
-            _calculatorLogic.SetCurrentOperation(operation);
             return operation;
         }
 
-        private void DoMultipleTermOperation(CalculatorResponse calculatorResponse)
-        {
-            calculatorResponse.CalculatorResult = _calculatorLogic.DoMultipleTermOperation();
-        }
-
-        private void DoSingleTermOperation(CalculatorResponse calculatorResponse)
-        {
-            calculatorResponse.CalculatorResult = _calculatorLogic.DoSingleTermOperation();
-        }
-
-        private void GetTheCalculatorState(CalculatorResponse calculatorResponse)
-        {
-            calculatorResponse.CalculatorState = _calculatorLogic.GetCalculatorState();
-        }
-
-        private void SetTheCalculatorStateIfExists(CalculatorRequest request)
+        private void SetTheCalculatorStateIfExistsInRequest(CalculatorRequest request)
         {
             if (request.CalculatorState != null)
             {
