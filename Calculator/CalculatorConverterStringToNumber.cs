@@ -14,13 +14,21 @@ namespace Calculator
             }
             else
             {
-                throw new CalculatorException(CalculatorExceptionCause.InvalidNumberInput);
+                throw new CalculatorException(CalculatorExceptionCause.InvalidNumberInput, valueToConvert);
             }
         }
         public static uint ConvertToUInt(string valueToConvert)
         {
-            uint.TryParse(valueToConvert, out uint result);
-            return result;
+            if (uint.TryParse(valueToConvert, out uint result))
+                {
+                return result;
+                }
+            else
+            {
+                throw new CalculatorException(CalculatorExceptionCause.ThisOperationRequiersNaturalOperants, valueToConvert);
+            }
         }
+
+
     }
 }

@@ -190,95 +190,88 @@ namespace Calculator
 
         private void btn_sum_click(object sender, EventArgs e)
         {
+            saveFirstTermAndOperation();
             operationPerformed = Operation.Sum;
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
             lbl_title.Text = "+";
         }
 
         private void btn_sub_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.Subtract;
             lbl_title.Text = "-";
         }
 
         private void btn_mul_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.Multiply;
             lbl_title.Text = "*";
         }
 
         private void btn_div_click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.Divide;
             lbl_title.Text = "/";
         }
         private void btn_RaiseNumberToPower_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.RaiseNumberToPower;
             lbl_title.Text = "^";
         }
 
         private void btn_SquareRoot_Click(object sender, EventArgs e)
         {
-
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.SquareRoot;
             lbl_title.Text = "SqRt";
         }
 
         private void btn_NumberParity_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.NumberParity;
             lbl_title.Text = "NumberParity";
         }
 
         private void btn_MirroredNumber_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.MirroredNumber;
             lbl_title.Text = "MirroredNumber";
         }
 
         private void btn_IsPrime_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.IsPrime;
             lbl_title.Text = "IsPrime";
         }
 
         private void btn_PalindromeSuperPalindrome_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.PalindromeSuperPalindrome;
             lbl_title.Text = "PalindromeSuperPalindrome";
         }
         private void btn_LeastCommonMultiple_Click(object sender, EventArgs e)
         {
-            isOperationPerformed = true;
-            firstTerm = textbox_result.Text;
+            saveFirstTermAndOperation();
             operationPerformed = Operation.LeastCommonMultiple;
             lbl_title.Text = "LeastCommonMultiple";
         }
 
-        private void btn_BiggestCommunalDivisor_Click(object sender, EventArgs e)
+        private void saveFirstTermAndOperation()
         {
             isOperationPerformed = true;
             firstTerm = textbox_result.Text;
+        }
+
+        private void btn_BiggestCommunalDivisor_Click(object sender, EventArgs e)
+        {
+            saveFirstTermAndOperation();
             operationPerformed = Operation.BiggestCommunalDivisor;
             lbl_title.Text = "BiggestCommunalDivisor";
         }
@@ -313,9 +306,18 @@ namespace Calculator
                         lbl_title.Text = "Select operation: +, -, * or /";
                     }
                     break;
-                case CalculatorExceptionCause.Error3:
+                case CalculatorExceptionCause.ThisOperationNeedsTwoOperants:
+                    {
+                        lbl_title.Text = "This operation needs two operants.";
+                    }
                     break;
-                case CalculatorExceptionCause.Error4:
+                case CalculatorExceptionCause.ThisOperationRequiersNaturalOperants:
+                    {
+                        lbl_title.Text = "This operation requiers natural operants.";
+                    }
+                    break;
+                case CalculatorExceptionCause.InvalidNumberInput:
+                    lbl_title.Text = $"{ex.Value} is not a number. Please enter a number";
                     break;
                 default:
                     break;
@@ -394,33 +396,34 @@ namespace Calculator
                         break;
                     }
                 case Operation.PalindromeSuperPalindrome:
-
                     {
-                        var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
-                        double mirrored = GetMirrored(termOne);
+                        uint termOne = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
+                        uint mirrored = GetMirrored(termOne);
                         var numberraisedtopower = Math.Pow(termOne, 2);
-                        var mirrored2 = GetMirrored(numberraisedtopower);
-                        CheckAndShowIfPalindromeOrSuperPalindrome(mirrored, numberraisedtopower, mirrored2);
+                        var mirrored2 = GetMirrored((uint)numberraisedtopower);
+                        CheckAndShowIfPalindromeOrSuperPalindrome(termOne, mirrored, numberraisedtopower, mirrored2);
                         break;
                     }
                 case Operation.LeastCommonMultiple:
                     {
-                        var number1 = Convert.ToUInt32(firstTerm);
-                        var number2 = Convert.ToUInt32(secondTerm);
+                        var number1 = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
+                        var number2 = CalculatorConverterStringToNumber.ConvertToUInt(secondTerm);
                         var number1Aux = number1;
                         var number2Aux = number2;
                         CheckLeastCommonMultiple(number1, number2, ref number1Aux, ref number2Aux);
-                        textbox_result.Text = $"LCM between {number1} and {number2} is {number2Aux}.";
+                        lbl_title.Text = $"LCM between {number1} and {number2} is {number2Aux}.";
+                        textbox_result.Text = $"{number2Aux}";
                         break;
                     }
                 case Operation.BiggestCommunalDivisor:
                     {
-                        var number1 = Convert.ToUInt32(firstTerm);
-                        var number2 = Convert.ToUInt32(secondTerm);
+                        var number1 = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
+                        var number2 = CalculatorConverterStringToNumber.ConvertToUInt(secondTerm);
                         var number1Aux = number1;
                         var number2Aux = number2;
                         CheckBiggestCommunalDivisor(ref number1Aux, ref number2Aux);
-                        textbox_result.Text = $"BCD between {number1} and {number2} is {number2Aux}.";
+                        lbl_title.Text = $"BCD between {number1} and {number2} is {number2Aux}.";
+                        textbox_result.Text = $"{number2Aux}";
                         break;
                     }
             }
@@ -441,24 +444,28 @@ namespace Calculator
             }
         }
 
-        private void CheckAndShowIfPalindromeOrSuperPalindrome(double mirrored, double numberraisedtopower, double mirrored2)
+        private void CheckAndShowIfPalindromeOrSuperPalindrome(uint termOne, double mirrored, double numberraisedtopower, double mirrored2)
         {
-            var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
+
             if (termOne == mirrored)
             {
                 if (numberraisedtopower == mirrored2)
                 {
-                    textbox_result.Text = $"{firstTerm} is a superpalindrome.";
+                    lbl_title.Text = $"{firstTerm} is a superpalindrome.";
+                    textbox_result.Text = firstTerm;
+
                 }
                 else
                 {
-                    textbox_result.Text = $"{firstTerm} is a palindrome.";
-
+                    lbl_title.Text = $"{firstTerm} is a palindrome.";
+                    textbox_result.Text = firstTerm;
                 }
             }
             else
             {
-                textbox_result.Text = $"{firstTerm} is not a palindrome.";
+                lbl_title.Text = $"{firstTerm} is not a palindrome.";
+                textbox_result.Text = firstTerm;
+
             }
         }
 
@@ -511,27 +518,36 @@ namespace Calculator
                 uint convertedFirstTerm = Convert.ToUInt32(firstTerm);
                 if (convertedFirstTerm <= 1)
                 {
-                    textbox_result.Text = $"{convertedFirstTerm} is not a prime number.";
+                    lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
+                    textbox_result.Text = $"{convertedFirstTerm}";
                 }
                 else if (convertedFirstTerm == 2)
                 {
-                    textbox_result.Text = $"{convertedFirstTerm} is  a prime number.";
+                    lbl_title.Text = $"{convertedFirstTerm} is  a prime number.";
+                    textbox_result.Text = $"{convertedFirstTerm}";
+
                 }
                 else
                 {
                     if (HasDivisors(convertedFirstTerm))
                     {
-                        textbox_result.Text = $"{convertedFirstTerm} is  a prime number.";
+                        lbl_title.Text = $"{convertedFirstTerm} is  a prime number.";
+                        textbox_result.Text = $"{convertedFirstTerm}";
+
                     }
                     else
                     {
-                        textbox_result.Text = $"{convertedFirstTerm} is not a prime number.";
+                        lbl_title.Text = $"{convertedFirstTerm} is not a prime number.";
+                        textbox_result.Text = $"{convertedFirstTerm}";
+
                     }
                 }
             }
             else
             {
-                textbox_result.Text = $" {firstTerm} is not a natural number.";
+                lbl_title.Text = $" {firstTerm} is not a natural number.";
+                textbox_result.Text = $"{firstTerm}";
+
             }
         }
 
@@ -548,7 +564,7 @@ namespace Calculator
         }
         private bool IsNaturalNumber(double value)
         {
-            if (Math.Floor(value) == value)
+            if (Math.Floor(value) == value && value > 0)
             {
                 return true;
             }
@@ -566,31 +582,31 @@ namespace Calculator
                 throw new CalculatorException(CalculatorExceptionCause.DivideBy0);
             }
         }
-        
-        private static double GetMirrored(double value)
+
+        private static uint GetMirrored(uint number)
         {
+
             uint ogl = 0;
-            uint number = Convert.ToUInt32(value);
             while (number != 0)
             {
                 ogl = ogl * 10 + number % 10;
                 number /= 10;
             }
-            double ConvertedOgl = Convert.ToDouble(ogl);
-
-            return ConvertedOgl;
+            return ogl;
         }
 
         private void SetLabelTitleTextBasedOnFirstTermParity()
         {
-            var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
+            var termOne = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
             if (termOne % 2 == 0)
             {
-                textbox_result.Text = "The number is even.";
+                lbl_title.Text = "The number is even.";
+                textbox_result.Text = $"{termOne}";
             }
             else
             {
-                textbox_result.Text = "The number is odd.";
+                lbl_title.Text = "The number is odd.";
+                textbox_result.Text = $"{termOne}";
             }
         }
     }
