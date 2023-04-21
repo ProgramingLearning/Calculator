@@ -1,6 +1,6 @@
-﻿namespace Calculator
+﻿namespace Calculator.Logic
 {
-    public enum Operation
+    public enum CalculatorOperation
     {
         None = 0,
         Sum = 1,

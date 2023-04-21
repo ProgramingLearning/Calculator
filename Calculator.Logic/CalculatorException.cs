@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Calculator
+namespace Calculator.Logic
 {
     public class CalculatorException : Exception
     {
