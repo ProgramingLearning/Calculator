@@ -24,7 +24,5 @@
                 throw new CalculatorException(CalculatorExceptionCause.ThisOperationRequiersNaturalOperants, valueToConvert);
             }
         }
-
-
     }
 }

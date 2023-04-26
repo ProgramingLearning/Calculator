@@ -68,7 +68,6 @@ namespace Calculator.Logic
                 case CalculatorOperation.LeastCommonMultiple:
                     {
                         ExecuteLeastCommonMultiple(firstTerm, secondTerm, result);
-
                     }
                     break;
                 case CalculatorOperation.BiggestCommunalDivisor:
