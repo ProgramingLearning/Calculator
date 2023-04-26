@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Calculator.Logic
 {
-    public class CalculatorExceptionHandler
+    public  class CalculatorExceptionHandler
     {
-        public string HandleCalculatorException(CalculatorException ex)
+        public  string HandleCalculatorException(CalculatorException ex)
         {
             switch (ex.ErrorType)
             {

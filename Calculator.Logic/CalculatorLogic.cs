@@ -17,62 +17,62 @@ namespace Calculator.Logic
                     break;
                 case CalculatorOperation.Sum:
                     {
-                        ExecuteSumOperation(firstTerm, secondTerm, result);
+                        ExecuteSumOperation(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.Subtract:
                     {
-                        ExecuteSubtractOperation(firstTerm, secondTerm, result);
+                        ExecuteSubtractOperation(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.Multiply:
                     {
-                        ExecuteMultiplyOperation(firstTerm, secondTerm, result);
+                        ExecuteMultiplyOperation(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.Divide:
                     {
-                        ExecuteDivideOperation(firstTerm, secondTerm, result);
+                        ExecuteDivideOperation(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.RaiseNumberToPower:
                     {
-                        ExecuteRaiseNumberToPower(firstTerm, secondTerm, result);
+                        ExecuteRaiseNumberToPower(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.SquareRoot:
                     {
-                        ExecuteSquareRootOperation(firstTerm, result);
+                        ExecuteSquareRootOperation(firstTerm);
                     }
                     break;
                 case CalculatorOperation.NumberParity:
                     {
-                        ExecuteNumberParityOperation(firstTerm, result);
+                        ExecuteNumberParityOperation(firstTerm);
                     }
                     break;
                 case CalculatorOperation.MirroredNumber:
                     {
-                        ExecuteGetMirroredOperation(firstTerm, result);
+                        ExecuteGetMirroredOperation(firstTerm);
                     }
                     break;
                 case CalculatorOperation.IsPrime:
                     {
-                        ExecutePrimeOperation(firstTerm, result);
+                        ExecutePrimeOperation(firstTerm);
                     }
                     break;
                 case CalculatorOperation.PalindromeSuperPalindrome:
                     {
-                        ExecutePalindromeOrSuperPalindromeOperation(firstTerm, result);
+                        ExecutePalindromeOrSuperPalindromeOperation(firstTerm);
                     }
                     break;
                 case CalculatorOperation.LeastCommonMultiple:
                     {
-                        ExecuteLeastCommonMultiple(firstTerm, secondTerm, result);
+                        ExecuteLeastCommonMultiple(firstTerm, secondTerm);
                     }
                     break;
                 case CalculatorOperation.BiggestCommunalDivisor:
                     {
-                        ExecuteBiggestCommunalDivisor(firstTerm, secondTerm, result);
+                        ExecuteBiggestCommunalDivisor(firstTerm, secondTerm);
                     }
                     break;
                 default:
@@ -81,50 +81,57 @@ namespace Calculator.Logic
             return result;
         }
 
-        private static void ExecuteSumOperation(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteSumOperation(string firstTerm, string secondTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var termTwo = CalculatorConverterStringToNumber.ConvertToDouble(secondTerm);
             var resultValue = termOne + termTwo;
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteSubtractOperation(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteSubtractOperation(string firstTerm, string secondTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var termTwo = CalculatorConverterStringToNumber.ConvertToDouble(secondTerm);
             var resultValue = termOne - termTwo;
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteMultiplyOperation(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteMultiplyOperation(string firstTerm, string secondTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var termTwo = CalculatorConverterStringToNumber.ConvertToDouble(secondTerm);
             var resultValue = termOne * termTwo;
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteDivideOperation(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteDivideOperation(string firstTerm, string secondTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var termTwo = CalculatorConverterStringToNumber.ConvertToDouble(secondTerm);
             var resultValue = termOne / termTwo;
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteRaiseNumberToPower(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteRaiseNumberToPower(string firstTerm, string secondTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var termTwo = CalculatorConverterStringToNumber.ConvertToDouble(secondTerm);
             var resultValue = Math.Pow(termOne, termTwo);
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteSquareRootOperation(string firstTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteSquareRootOperation(string firstTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
             var resultValue = Math.Sqrt(termOne);
-            result.Value = resultValue.ToString();
+            var result = new CalculatorResult { Value = resultValue.ToString() };
+            return result;
         }
-        private static void ExecuteNumberParityOperation(string firstTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteNumberParityOperation(string firstTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
+            var result = new CalculatorResult();
             if (termOne % 2 == 0)
             {
                 result.Message = "The number is even.";
@@ -135,10 +142,12 @@ namespace Calculator.Logic
                 result.Message = "The number is odd.";
                 result.Value = $"{termOne}";
             }
+            return result;
         }
-        private static void ExecuteGetMirroredOperation(string firstTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteGetMirroredOperation(string firstTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
+            var result = new CalculatorResult();
             if (IsNaturalNumber(termOne))
             {
                 uint number = Convert.ToUInt32(firstTerm);
@@ -149,6 +158,7 @@ namespace Calculator.Logic
             {
                 result.Message = "Please enter a natural number.";
             }
+            return result;
         }
         private static uint GetMirroredNumber(uint number)
         {
@@ -160,9 +170,10 @@ namespace Calculator.Logic
             }
             return mirrored;
         }
-        private static void ExecutePrimeOperation(string firstTerm, CalculatorResult result)
+        private static CalculatorResult ExecutePrimeOperation(string firstTerm)
         {
             var termOne = CalculatorConverterStringToNumber.ConvertToDouble(firstTerm);
+            var result = new CalculatorResult();
             if (IsNaturalNumber(termOne))
             {
                 uint convertedFirstTerm = Convert.ToUInt32(firstTerm);
@@ -199,13 +210,15 @@ namespace Calculator.Logic
                 result.Value = $"{firstTerm}";
 
             }
+            return result;
         }
-        private static void ExecutePalindromeOrSuperPalindromeOperation(string firstTerm, CalculatorResult result)
+        private static CalculatorResult ExecutePalindromeOrSuperPalindromeOperation(string firstTerm)
         {
             uint termOne = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
             uint mirrored = GetMirroredNumber(termOne);
             var numberraisedtopower = Math.Pow(termOne, 2);
             var mirrored2 = GetMirroredNumber((uint)numberraisedtopower);
+            var result = new CalculatorResult();
             if (termOne == mirrored)
             {
                 if (numberraisedtopower == mirrored2)
@@ -226,16 +239,19 @@ namespace Calculator.Logic
                 result.Value = firstTerm;
 
             }
+            return result;
         }
-        private static void ExecuteLeastCommonMultiple(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteLeastCommonMultiple(string firstTerm, string secondTerm)
         {
             var number1 = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
             var number2 = CalculatorConverterStringToNumber.ConvertToUInt(secondTerm);
             var number1Aux = number1;
             var number2Aux = number2;
+            var result = new CalculatorResult();
             CheckLeastCommonMultiple(number1, number2, ref number1Aux, ref number2Aux);
             result.Message = $"LCM between {number1} and {number2} is {number2Aux}.";
             result.Value = $"{number2Aux}";
+            return result;
         }
         private static void CheckLeastCommonMultiple(uint number1, uint number2, ref uint number1Aux, ref uint number2Aux)
         {
@@ -251,15 +267,18 @@ namespace Calculator.Logic
                 }
             }
         }
-        private static void ExecuteBiggestCommunalDivisor(string firstTerm, string secondTerm, CalculatorResult result)
+        private static CalculatorResult ExecuteBiggestCommunalDivisor(string firstTerm, string secondTerm)
         {
             var number1 = CalculatorConverterStringToNumber.ConvertToUInt(firstTerm);
             var number2 = CalculatorConverterStringToNumber.ConvertToUInt(secondTerm);
             var number1Aux = number1;
             var number2Aux = number2;
+            var result = new CalculatorResult();
             CheckBiggestCommunalDivisor(ref number1Aux, ref number2Aux);
             result.Message = $"BCD between {number1} and {number2} is {number2Aux}.";
             result.Value = $"{number2Aux}";
+            return result;
+
         }
         private static void CheckBiggestCommunalDivisor(ref uint number1Aux, ref uint number2Aux)
         {
