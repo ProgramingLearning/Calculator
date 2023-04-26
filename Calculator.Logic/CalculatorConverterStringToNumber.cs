@@ -16,9 +16,9 @@
         public static uint ConvertToUInt(string valueToConvert)
         {
             if (uint.TryParse(valueToConvert, out uint result))
-                {
+            {
                 return result;
-                }
+            }
             else
             {
                 throw new CalculatorException(CalculatorExceptionCause.ThisOperationRequiersNaturalOperants, valueToConvert);

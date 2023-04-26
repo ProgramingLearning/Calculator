@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Calculator.Logic
 {
-    internal class CalculatorExceptionHandler
+    public class CalculatorExceptionHandler
     {
         public string HandleCalculatorException(CalculatorException ex)
         {

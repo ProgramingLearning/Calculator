@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32616.157
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{7A93B86D-005A-4C25-932C-B830416ED68E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorTests", "CalculatorTests\CalculatorTests.csproj", "{E7EABDEA-045F-47D9-ADC8-206EA6779E0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.UnitTests", "CalculatorTests\Calculator.UnitTests.csproj", "{E7EABDEA-045F-47D9-ADC8-206EA6779E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Logic", "Calculator.Logic\Calculator.Logic.csproj", "{0F2D88AD-DB08-4AC3-A1B9-EFD2FBC624FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Logic", "Calculator.Logic\Calculator.Logic.csproj", "{0F2D88AD-DB08-4AC3-A1B9-EFD2FBC624FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
