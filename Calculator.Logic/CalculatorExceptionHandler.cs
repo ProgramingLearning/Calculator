@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Calculator;
 
 namespace Calculator.Logic
 {
@@ -8,36 +10,28 @@ namespace Calculator.Logic
     {
         public static string HandleCalculatorException(CalculatorException ex)
         {
-            switch (ex.ErrorType)
+            Dictionary<CalculatorExceptionCause, string> errorMessages = new Dictionary<CalculatorExceptionCause, string>()
+{
+    { CalculatorExceptionCause.None, "all good" },
+    { CalculatorExceptionCause.DivideBy0, "Cannot divide by 0" },
+    { CalculatorExceptionCause.NoOperationSelected, "Select operation: +, -, * or /" },
+    { CalculatorExceptionCause.ThisOperationNeedsTwoOperants, "This operation needs two operants." },
+    { CalculatorExceptionCause.ThisOperationRequiersNaturalOperants, "This operation requiers natural operants." },
+    { CalculatorExceptionCause.InvalidNumberInput, "{0} is not a number. Please enter a number" }
+};
+            string errorMessage;
+            if (errorMessages.TryGetValue(ex.ErrorType, out errorMessage))
             {
-                case CalculatorExceptionCause.None:
-                    {
-                        return "all good";
-                    }
-                case CalculatorExceptionCause.DivideBy0:
-                    {
-                        return "Cannot divide by 0";
-                    }
-                case CalculatorExceptionCause.NoOperationSelected:
-                    {
-                        return "Select operation: +, -, * or /";
-                    }
-                case CalculatorExceptionCause.ThisOperationNeedsTwoOperants:
-                    {
-                        return "This operation needs two operants.";
-                    }
-                case CalculatorExceptionCause.ThisOperationRequiersNaturalOperants:
-                    {
-                        return "This operation requiers natural operants.";
-                    }
-                case CalculatorExceptionCause.InvalidNumberInput:
-                    {
-                        return $"{ex.Value} is not a number. Please enter a number";
-                    }
-                default:
-                    {
-                        return "unknown cause";
-                    }
+                if (ex.ErrorType == CalculatorExceptionCause.InvalidNumberInput)
+                {
+                    errorMessage = string.Format(errorMessage, ex.Value);
+                }
+
+                return errorMessage;
+            }
+            else
+            {
+                return "unknown cause";
             }
         }
     }
