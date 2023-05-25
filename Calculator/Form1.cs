@@ -286,8 +286,7 @@ namespace Calculator
             }
             catch (CalculatorException ex)
             {
-                var errorHandler = new CalculatorExceptionHandler();
-                lbl_title.Text = errorHandler.HandleCalculatorException(ex);
+                lbl_title.Text = CalculatorExceptionHandler.HandleCalculatorException(ex);
             }
         }
 
