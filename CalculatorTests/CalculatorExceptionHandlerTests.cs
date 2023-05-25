@@ -5,12 +5,11 @@ using Calculator;
 using Calculator.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Calculator.Logic.Tests
+namespace Calculator.Logic.UnitTests
 {
     [TestClass()]
     public class CalculatorExceptionHandlerTests
     {
-     
         [TestMethod()]
         public void HandleCalculatorException_None_ReturnsAllGood()
         {

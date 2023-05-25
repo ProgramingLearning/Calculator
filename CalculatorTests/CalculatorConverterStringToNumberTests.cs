@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Calculator.UnitTests
+namespace Calculator.Logic.UnitTests
 {
     [TestClass()]
     public class CalculatorConvertorStringToNumberTests
