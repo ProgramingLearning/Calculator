@@ -1,5 +1,5 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Calculator.Logic.Errors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace Calculator.Logic.Tests
@@ -34,7 +34,7 @@ namespace Calculator.Logic.Tests
         public void ReadTerm_WhenTermsListHasValues_AndTriesToConvertToUnknownType_ThrowsCalculatorException()
         {
             //Arrange
-            var termsList = new List<string>() { "5"};
+            var termsList = new List<string>() { "5" };
 
             //Act
             //Assert
@@ -45,7 +45,7 @@ namespace Calculator.Logic.Tests
         public void ReadTerm_WhenTermsListHasValues_AndTriesToConvertToDoubleType_ReturnListWithTermsOfDoubleType()
         {
             //Arrange
-            var termsList = new List<string>() {"5"};
+            var termsList = new List<string>() { "5" };
             double expected = 5;
             //Act
             var actual = _sut.ReadTerm<double>(termsList);

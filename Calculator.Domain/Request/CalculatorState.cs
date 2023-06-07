@@ -14,6 +14,4 @@ namespace Calculator.Domain.Request
             Terms = new List<string>();
         }
     }
-
-
 }

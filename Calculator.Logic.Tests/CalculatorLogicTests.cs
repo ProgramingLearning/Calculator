@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Collections.Generic;
-using Calculator.Logic.Errors;
-using Calculator.Domain.Request;
+﻿using Calculator.Domain.Request;
 using Calculator.Domain.Response;
+using Calculator.Logic.Errors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
+using System.Collections.Generic;
 
 namespace Calculator.Logic.Tests
 {
@@ -519,6 +520,37 @@ namespace Calculator.Logic.Tests
 
             // Assert
             Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void ResetTerms_ShouldResetTermsToEmptyList()
+        {
+            // Arrange
+            _sut.SetCurrentOperation(Operation.Sum);
+            _sut.AddTerm("term1");
+            _sut.AddTerm("term2");
+
+            // Act
+            _sut.ResetTerms();
+
+            // Assert
+            List<string> expectedTerms = new List<string>();
+            CalculatorState actualCalculatorState = _sut.GetCalculatorState();
+            CollectionAssert.AreEqual(expectedTerms, actualCalculatorState.Terms);
+        }
+
+        [TestMethod]
+        public void SetState_ShouldSetCalculatorState()
+        {
+            // Arrange
+            CalculatorState calculatorState = new CalculatorState { Terms = new List<string> { "term1", "term2" } };
+
+            // Act
+            _sut.SetState(calculatorState);
+
+            // Assert
+            CalculatorState actualCalculatorState = _sut.GetCalculatorState();
+            Assert.AreEqual(calculatorState, actualCalculatorState);
         }
     }
 }
