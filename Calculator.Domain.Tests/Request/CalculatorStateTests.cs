@@ -1,6 +1,7 @@
 ﻿using Calculator.Domain.Request;
 using Calculator.Domain.Response;
 using Calculator.Logic.Errors;
+using Calculator.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
