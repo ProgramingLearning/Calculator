@@ -2,6 +2,7 @@
 using Calculator.Domain.Response;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Calculator.Logic;
 using System.Collections.Generic;
 
 namespace Calculator.Domain.Tests.Response
