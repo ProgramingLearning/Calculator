@@ -12,6 +12,13 @@ namespace Calculator.API.Controllers
     [ApiController]
     public class CalculatorController : ControllerBase
     {
+        private readonly ICalculatorLogic _calculatorLogic;
+
+        public CalculatorController(ICalculatorLogic calculatorLogic)
+        {
+            _calculatorLogic = calculatorLogic;
+        }
+
         [HttpGet("MultipleTermOperation")]
         public ActionResult<CalculatorResponse> GetMultipleTermResponse([FromQuery] CalculatorRequest calculatorRequest)
         {

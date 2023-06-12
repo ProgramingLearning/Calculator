@@ -3,7 +3,7 @@ using Calculator.Logic.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace Calculator.Logic.Tests
+namespace Calculator.Domain.Tests.Response
 {
     [TestClass]
     public class CalculatorValidatorTests

@@ -15,6 +15,4 @@ namespace Calculator.Domain.Request
             CurrentOperation = Operation.None;
         }
     }
-
-
 }

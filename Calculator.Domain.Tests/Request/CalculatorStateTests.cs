@@ -6,7 +6,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 
-namespace Calculator.Logic.Tests
+namespace Calculator.Domain.Tests.Request
 {
     [TestClass]
     public class CalculatorLogicTests
