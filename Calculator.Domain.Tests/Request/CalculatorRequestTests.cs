@@ -1,26 +1,45 @@
-using Calculator.Logic.Errors;
-using Calculator.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using Calculator.Domain.Request;
 
 namespace Calculator.Domain.Tests.Request
 {
     [TestClass]
-    public class CalculatorErrorTests
+    public class CalculatorRequestTests
     {
-        private Mock<ICalculatorLogic> _calculatorLogicMock;
-        private Mock<ICalculatorValidator> _calculatorValidatorMock;
-        private Mock<IStringToNumberConvertor> _stringToNumberConvertorMock;
-        private CalculatorError _sut;
-
-        [TestInitialize]
-        public void Initialize()
+        [TestMethod]
+        public void CalculatorRequest_ButtonClicked_SetAndGetCorrectly()
         {
-            _calculatorLogicMock = new Mock<ICalculatorLogic>();
-            _calculatorValidatorMock = new Mock<ICalculatorValidator>();
-            _stringToNumberConvertorMock = new Mock<IStringToNumberConvertor>();
+            // Arrange
+            string buttonClicked = "2_=";
+            var calculatorState = new CalculatorState();
 
-            _sut = new CalculatorError();
+            // Act
+            var calculatorRequest = new CalculatorRequest
+            {
+                ButtonClicked = buttonClicked,
+                CalculatorState = calculatorState
+            };
+
+            // Assert
+            Assert.AreEqual(buttonClicked, calculatorRequest.ButtonClicked);
+        }
+
+        [TestMethod]
+        public void CalculatorRequest_CalculatorState_SetAndGetCorrectly()
+        {
+            // Arrange
+            string buttonClicked = "2_=";
+            var calculatorState = new CalculatorState();
+
+            // Act
+            var calculatorRequest = new CalculatorRequest
+            {
+                ButtonClicked = buttonClicked,
+                CalculatorState = calculatorState
+            };
+
+            // Assert
+            Assert.AreEqual(calculatorState, calculatorRequest.CalculatorState);
         }
     }
 }
