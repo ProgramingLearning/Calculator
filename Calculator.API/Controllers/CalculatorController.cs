@@ -4,8 +4,7 @@ using Calculator.Logic;
 using Calculator.Logic.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.VisualBasic;
 
 namespace Calculator.API.Controllers
 {
@@ -13,10 +12,31 @@ namespace Calculator.API.Controllers
     [ApiController]
     public class CalculatorController : ControllerBase
     {
-        [HttpGet]
-        public CalculatorResponse GetResponse([FromQuery]CalculatorRequest calculatorRequest)
+        [HttpGet("MultipleTermOperation")]
+        public ActionResult<CalculatorResponse> GetMultipleTermResponse([FromQuery] CalculatorRequest calculatorRequest)
         {
-            return new CalculatorResponse();
+            if (IsValidTermInput(calculatorRequest))
+            {
+                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
+            return Ok(calculatorService.GetCalculatorResponseForMultipleTermOperation(calculatorRequest));
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("SingleTermOperation")]
+        public ActionResult<CalculatorResponse> GetSingleTermResponse([FromQuery] CalculatorRequest calculatorRequest)
+        {
+            if (IsValidTermInput(calculatorRequest))
+            {
+                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
+                return Ok(calculatorService.GetCalculatorResponseForSingleTermOperation(calculatorRequest));
+            }
+            return BadRequest();
+        }
+        private bool IsValidTermInput(CalculatorRequest calculatorRequest)
+        {
+            var strings = calculatorRequest.ButtonClicked.Split('_').ToList();
+            return strings != null && strings.Count == 2;
         }
     }
 }

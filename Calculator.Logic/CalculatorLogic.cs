@@ -295,6 +295,7 @@ namespace Calculator.Logic
 
         private static int Reverse(int number)
         {
+
             int reversedNumber = 0;
             int reminder;
 

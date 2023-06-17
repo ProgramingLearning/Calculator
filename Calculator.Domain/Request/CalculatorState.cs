@@ -12,6 +12,7 @@ namespace Calculator.Domain.Request
         public CalculatorState()
         {
             Terms = new List<string>();
+            CurrentOperation = Operation.None;
         }
     }
 
