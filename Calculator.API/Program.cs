@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Calculator.Logic;
+using Calculator.Logic.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 var devCorsPolicy = "devCorsPolicy";
@@ -19,6 +21,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ICalculatorLogic, CalculatorLogic>();
+builder.Services.AddSingleton<ICalculatorError, CalculatorError>();
+builder.Services.AddSingleton<ICalculatorValidator, CalculatorValidator>();
+builder.Services.AddSingleton<IStringToNumberConvertor, StringToNumberConvertor>();
+
 
 var app = builder.Build();
 
