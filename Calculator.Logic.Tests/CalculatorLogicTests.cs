@@ -5,6 +5,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using Calculator.Logic.Errors;
+using Calculator.Domain.Request;
+using Calculator.Domain.Response;
 
 namespace Calculator.Logic.Tests
 {

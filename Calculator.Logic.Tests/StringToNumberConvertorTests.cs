@@ -1,5 +1,6 @@
 using Calculator.Logic.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Calculator.Logic.Errors;
 using System.Collections.Generic;
 
 namespace Calculator.Logic.Tests

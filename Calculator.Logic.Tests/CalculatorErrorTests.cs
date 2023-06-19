@@ -1,6 +1,7 @@
-using Calculator.Logic.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
+using Calculator.Logic.Errors;
 
 namespace Calculator.Logic.Tests
 {

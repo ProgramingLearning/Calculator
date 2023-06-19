@@ -2,6 +2,8 @@ using Calculator.Domain.Request;
 using Calculator.Logic.Errors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Calculator.Logic.Errors;
+using Calculator.Domain.Request;
 
 namespace Calculator.Logic.Tests
 {
