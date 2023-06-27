@@ -11,10 +11,11 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
-builder.Services.AddScoped<ICalculatorLogic, CalculatorLogic>();
 builder.Services.AddSingleton<ICalculatorValidator, CalculatorValidator>();
 builder.Services.AddSingleton<ICalculatorError, CalculatorError>();
 builder.Services.AddSingleton<IStringToNumberConvertor, StringToNumberConvertor>();
+// because of calculatorState in calculator logic, these cannot be singleton
+builder.Services.AddScoped<ICalculatorLogic, CalculatorLogic>();
 builder.Services.AddScoped<ICalculatorService, CalculatorService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
