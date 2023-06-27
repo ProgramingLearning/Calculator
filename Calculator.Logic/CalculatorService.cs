@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Calculator.Logic
 {
-    public class CalculatorService
+    public class CalculatorService : ICalculatorService
     {
         private ICalculatorLogic _calculatorLogic;
 
