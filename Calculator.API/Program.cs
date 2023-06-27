@@ -1,3 +1,5 @@
+using Calculator.Logic;
+using Calculator.Logic.Errors;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +11,12 @@ builder.Services.AddCors(options =>
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
+builder.Services.AddScoped<ICalculatorLogic, CalculatorLogic>();
+builder.Services.AddSingleton<ICalculatorValidator, CalculatorValidator>();
+builder.Services.AddSingleton<ICalculatorError, CalculatorError>();
+builder.Services.AddSingleton<IStringToNumberConvertor, StringToNumberConvertor>();
+builder.Services.AddScoped<ICalculatorService, CalculatorService>();
 
-builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());

@@ -12,13 +12,20 @@ namespace Calculator.API.Controllers
     [ApiController]
     public class CalculatorController : ControllerBase
     {
+        private readonly ICalculatorService _calculatorService;
+
+        public CalculatorController(ICalculatorService calculatorService)
+        {
+            this._calculatorService = calculatorService;
+        }
+
         [HttpGet("MultipleTermOperation")]
         public ActionResult<CalculatorResponse> GetMultipleTermResponse([FromQuery] CalculatorRequest calculatorRequest)
         {
             if (IsValidTermInput(calculatorRequest))
             {
-                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
-            return Ok(calculatorService.GetCalculatorResponseForMultipleTermOperation(calculatorRequest));
+                
+            return Ok(_calculatorService.GetCalculatorResponseForMultipleTermOperation(calculatorRequest));
             }
             return BadRequest();
         }
@@ -28,8 +35,8 @@ namespace Calculator.API.Controllers
         {
             if (IsValidTermInput(calculatorRequest))
             {
-                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
-                return Ok(calculatorService.GetCalculatorResponseForSingleTermOperation(calculatorRequest));
+                
+                return Ok(_calculatorService.GetCalculatorResponseForSingleTermOperation(calculatorRequest));
             }
             return BadRequest();
         }
