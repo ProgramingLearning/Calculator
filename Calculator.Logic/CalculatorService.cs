@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Cache;
-
 using System.Text;
 
 namespace Calculator.Logic
@@ -17,26 +16,28 @@ namespace Calculator.Logic
         {
             _calculatorLogic = calculatorLogic;
         }
-        public CalculatorResponse GetCalculatorResponseForMultipleTermOperation(CalculatorRequest request)
+
+        public MultipleTermOperationCalculatorResponse GetCalculatorResponseForMultipleTermOperation(MultipleTermOperationCalculatorRequest request)
         {
-            var calculatorResponse = new CalculatorResponse();
-            var strings = request.ButtonClicked.Split('_').ToList();
+            var calculatorResponse = new MultipleTermOperationCalculatorResponse();
+            var strings = request.CalculatorInput.Split('_').ToList();
             SetTheCalculatorStateIfExistsInRequest(request);
+            _calculatorLogic.SetLastTerm(strings[0]);
             _calculatorLogic.AddTerm(strings[0]);
             ProcessOperationForMultipleTerm(calculatorResponse, strings[1]);
             return calculatorResponse;
         }
 
-        public CalculatorResponse GetCalculatorResponseForSingleTermOperation(CalculatorRequest request)
+        public SingleTermOperationCalculatorResponse GetCalculatorResponseForSingleTermOperation(SingleTermOperationCalculatorRequest request)
         {
-            var calculatorResponse = new CalculatorResponse();
-            var strings = request.ButtonClicked.Split('_').ToList();
+            var calculatorResponse = new SingleTermOperationCalculatorResponse();
+            var strings = request.CalculatorInput.Split('_').ToList();
             _calculatorLogic.AddTerm(strings[0]);
             ProcessOperationForSingleTerm(calculatorResponse, strings[1]);
             return calculatorResponse;
         }
 
-        private void ProcessOperationForMultipleTerm(CalculatorResponse calculatorResponse, string strings)
+        private void ProcessOperationForMultipleTerm(MultipleTermOperationCalculatorResponse calculatorResponse, string strings)
         {
             if (strings == "=")
             {
@@ -48,16 +49,18 @@ namespace Calculator.Logic
                 _calculatorLogic.SetCurrentOperation(operation);
                 calculatorResponse.CalculatorState = _calculatorLogic.GetCalculatorState();
             }
+            calculatorResponse.LastTerm = _calculatorLogic.GetLastTerm();
+            calculatorResponse.Operation = _calculatorLogic.GetCurrentOperation();
         }
 
-        private void ProcessOperationForSingleTerm(CalculatorResponse calculatorResponse, string strings)
+        private void ProcessOperationForSingleTerm(SingleTermOperationCalculatorResponse calculatorResponse, string strings)
         {
             var operation = Enum.Parse<Operation>(strings);
             _calculatorLogic.SetCurrentOperation(operation);
             calculatorResponse.CalculatorResult = _calculatorLogic.DoSingleTermOperation();
         }
 
-        private void SetTheCalculatorStateIfExistsInRequest(CalculatorRequest request)
+        private void SetTheCalculatorStateIfExistsInRequest(MultipleTermOperationCalculatorRequest request)
         {
             if (request.CalculatorState != null)
             {
@@ -66,4 +69,5 @@ namespace Calculator.Logic
         }
     }
 }
+
 

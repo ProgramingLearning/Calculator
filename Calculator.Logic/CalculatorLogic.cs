@@ -337,6 +337,14 @@ namespace Calculator.Logic
         {
             _calculatorState.Terms.Add(_lastTerm);
         }
+        public void SetLastTerm(string term)
+        {
+            _lastTerm = term;
+        }
+                public string GetLastTerm()
+        {
+            return _lastTerm;
+        }
 
         public void ResetTerms()
         {

@@ -15,6 +15,8 @@ namespace Calculator.Logic
 
         void AddTerm(string term);
 
+        void SetLastTerm(string term);
+
         void ResetTerms();
 
         void SetCurrentOperation(Operation operation);
@@ -24,5 +26,6 @@ namespace Calculator.Logic
         bool ShouldPerformOperationForCurrentTerms(Operation newOperation);
 
         bool ShouldRepeatLastOperation(Operation newOperation);
+        string GetLastTerm();
     }
 }
