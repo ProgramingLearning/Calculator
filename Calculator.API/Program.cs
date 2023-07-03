@@ -15,7 +15,8 @@ builder.Services.AddSingleton<ICalculatorValidator, CalculatorValidator>();
 builder.Services.AddSingleton<ICalculatorError, CalculatorError>();
 builder.Services.AddSingleton<IStringToNumberConvertor, StringToNumberConvertor>();
 // because of calculatorState in calculator logic, these cannot be singleton
-builder.Services.AddScoped<ICalculatorLogic, CalculatorLogic>();
+builder.Services.AddScoped<ISingleTermOperationLogic, SingleTermOperationLogic>();
+builder.Services.AddScoped<IMultipleTermOperationLogic, MultipleTermOperationLogic>();
 builder.Services.AddScoped<ICalculatorService, CalculatorService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>

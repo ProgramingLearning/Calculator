@@ -5,7 +5,7 @@ namespace Calculator.Logic
 {
     public interface ICalculatorService
     {
-        CalculatorResponse GetCalculatorResponseForMultipleTermOperation(CalculatorRequest request);
-        CalculatorResponse GetCalculatorResponseForSingleTermOperation(CalculatorRequest request);
+        MultipleTermOperationCalculatorResponse GetCalculatorResponseForMultipleTermOperation(MultipleTermOperationCalculatorRequest request);
+        SingleTermOperationCalculatorResponse GetCalculatorResponseForSingleTermOperation(SingleTermOperationCalculatorRequest request);
     }
 }
