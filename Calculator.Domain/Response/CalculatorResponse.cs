@@ -6,7 +6,7 @@ namespace Calculator.Domain.Response
     {
         public CalculatorState CalculatorState { get; set; }
         public CalculatorResult CalculatorResult { get; set; }
-        public Operation Operation { get; set; }
+        public MultipleTermOperation Operation { get; set; }
         public string LastTerm { get; set; }
     }
 

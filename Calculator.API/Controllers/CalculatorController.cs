@@ -15,7 +15,18 @@ namespace Calculator.API.Controllers
         {
             if (IsValidRequest(calculatorRequest))
             {
-                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
+                var calculatorService = new CalculatorService(
+                    new SingleTermOperationLogic(
+                        new CalculatorError(),
+                        new CalculatorValidator(),
+                        new StringToNumberConvertor()
+                        ),
+                    new MultipleTermOperationLogic(
+                        new CalculatorError(),
+                        new CalculatorValidator(),
+                        new StringToNumberConvertor()
+                        )
+                    );
                 return Ok(calculatorService.GetCalculatorResponseForMultipleTermOperation(calculatorRequest));
             }
             return BadRequest();
@@ -26,7 +37,18 @@ namespace Calculator.API.Controllers
         {
             if (IsValidRequest(calculatorRequest))
             {
-                var calculatorService = new CalculatorService(new CalculatorLogic(new CalculatorError(), new CalculatorValidator(), new StringToNumberConvertor()));
+                var calculatorService = new CalculatorService(
+                    new SingleTermOperationLogic(
+                        new CalculatorError(),
+                        new CalculatorValidator(),
+                        new StringToNumberConvertor()
+                        ),
+                    new MultipleTermOperationLogic(
+                        new CalculatorError(),
+                        new CalculatorValidator(),
+                        new StringToNumberConvertor()
+                        )
+                    );
                 return Ok(calculatorService.GetCalculatorResponseForSingleTermOperation(calculatorRequest));
             }
             return BadRequest();

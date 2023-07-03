@@ -9,6 +9,7 @@ namespace Calculator.Logic
     {
         void ValidateTermsForDivision(List<double> terms);
         void ValidateTermsForMultipleTermsOperation(List<double> terms);
-        void ValidateOperation(Operation operation);
+        void ValidateMultipleTermOperation(MultipleTermOperation operation);
+        void ValidateSingleTermOperation(SingleTermOperation operation);
     }
 }

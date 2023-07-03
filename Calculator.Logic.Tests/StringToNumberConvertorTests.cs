@@ -17,16 +17,16 @@ namespace Calculator.Logic.Tests
         }
 
         [TestMethod]
-        public void ReadTerm_WhenTermsListIsEmpty_ReturnsDefaultValue()
+        public void ReadTerm_WhenTermIsEmpty_ReturnsDefaultValue()
         {
-            //Arrange
-            var termsList = new List<string>();
-            double expected = default;
+            // Arrange
+            string term = string.Empty;
+            double expected = 0.0;
 
-            //Act
-            var actual = _sut.ReadTerm<double>(termsList);
+            // Act
+            var actual = _sut.ReadTerm<double>(term);
 
-            //Assert
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
@@ -34,21 +34,21 @@ namespace Calculator.Logic.Tests
         public void ReadTerm_WhenTermsListHasValues_AndTriesToConvertToUnknownType_ThrowsCalculatorException()
         {
             //Arrange
-            var termsList = new List<string>() { "5"};
+            string term = "5";
 
             //Act
             //Assert
-            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<float>(termsList));
+            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<float>(term));
         }
 
         [TestMethod]
         public void ReadTerm_WhenTermsListHasValues_AndTriesToConvertToDoubleType_ReturnListWithTermsOfDoubleType()
         {
             //Arrange
-            var termsList = new List<string>() {"5"};
+            string term = "5";
             double expected = 5;
             //Act
-            var actual = _sut.ReadTerm<double>(termsList);
+            var actual = _sut.ReadTerm<double>(term);
             //Assert
             Assert.AreEqual(expected, actual);
         }
@@ -57,10 +57,10 @@ namespace Calculator.Logic.Tests
         public void ReadTerm_WhenTermsListHasValues_AndTriesToConvertToIntType_ReturnListWithTermsOfIntType()
         {
             //Arrange
-            var termsList = new List<string>() { "5" };
+            string term = "5";          
             int expected = 5;
             //Act
-            var actual = _sut.ReadTerm<int>(termsList);
+            var actual = _sut.ReadTerm<int>(term);
             //Assert
             Assert.AreEqual(expected, actual);
         }
@@ -69,22 +69,22 @@ namespace Calculator.Logic.Tests
         public void ReadTerm_WhenTermsListHasInvalidValues_AndTriesToConvertToDoubleType_ThrowsCalculatorException()
         {
             //Arrange
-            var termsList = new List<string>() { "f" };
+            string term = "f";
 
             //Act
             //Assert
-            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<double>(termsList));
+            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<double>(term));
         }
 
         [TestMethod]
         public void ReadTerm_WhenTermsListHasInvalidValues_AndTriesToConvertToIntType_ThrowsCalculatorException()
         {
             //Arrange
-            var termsList = new List<string>() { "3,2" };
+            string term = "3,2";
 
             //Act
             //Assert
-            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<int>(termsList));
+            Assert.ThrowsException<CalculatorException>(() => _sut.ReadTerm<int>(term));
         }
 
         [TestMethod]

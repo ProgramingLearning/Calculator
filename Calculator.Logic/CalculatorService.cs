@@ -10,11 +10,13 @@ namespace Calculator.Logic
 {
     public class CalculatorService
     {
-        private ICalculatorLogic _calculatorLogic;
+        private ISingleTermOperationLogic _singleTermOperationLogic;
+        private IMultipleTermOperationLogic _multipleTermOperationLogic;
 
-        public CalculatorService(ICalculatorLogic calculatorLogic)
+        public CalculatorService(ISingleTermOperationLogic singleTermOperationLogic, IMultipleTermOperationLogic multipleTermOperationLogic)
         {
-            _calculatorLogic = calculatorLogic;
+            _singleTermOperationLogic = singleTermOperationLogic;
+            _multipleTermOperationLogic = multipleTermOperationLogic;
         }
 
         public MultipleTermOperationCalculatorResponse GetCalculatorResponseForMultipleTermOperation(MultipleTermOperationCalculatorRequest request)
@@ -22,9 +24,9 @@ namespace Calculator.Logic
             var calculatorResponse = new MultipleTermOperationCalculatorResponse();
             var strings = request.CalculatorInput.Split('_').ToList();
             SetTheCalculatorStateIfExistsInRequest(request);
-            _calculatorLogic.SetLastTerm(strings[0]);
-            _calculatorLogic.AddTerm(strings[0]);
-            ProcessOperationForMultipleTerm(calculatorResponse, strings[1]);
+            _multipleTermOperationLogic.SetLastTerm(strings[0]);
+            _multipleTermOperationLogic.AddTerm(strings[0]);
+            calculatorResponse= ProcessOperationForMultipleTerm(strings[1]);
             return calculatorResponse;
         }
 
@@ -32,42 +34,40 @@ namespace Calculator.Logic
         {
             var calculatorResponse = new SingleTermOperationCalculatorResponse();
             var strings = request.CalculatorInput.Split('_').ToList();
-            _calculatorLogic.AddTerm(strings[0]);
-            ProcessOperationForSingleTerm(calculatorResponse, strings[1]);
+            var operation = Enum.Parse<SingleTermOperation>(strings[1]);
+            calculatorResponse.CalculatorResult = _singleTermOperationLogic.DoSingleTermOperation(operation, strings[0]);
             return calculatorResponse;
         }
 
-        private void ProcessOperationForMultipleTerm(MultipleTermOperationCalculatorResponse calculatorResponse, string strings)
+        private MultipleTermOperationCalculatorResponse ProcessOperationForMultipleTerm(string strings)
         {
+            var calculatorResponse = new MultipleTermOperationCalculatorResponse();
             if (strings == "=")
             {
-                calculatorResponse.CalculatorResult = _calculatorLogic.DoMultipleTermOperation();
+                calculatorResponse.CalculatorResult = _multipleTermOperationLogic.DoMultipleTermOperation();
             }
             else
             {
-                var operation = Enum.Parse<Operation>(strings);
-                _calculatorLogic.SetCurrentOperation(operation);
-                calculatorResponse.CalculatorState = _calculatorLogic.GetCalculatorState();
+                var operation = Enum.Parse<MultipleTermOperation>(strings);
+                _multipleTermOperationLogic.SetCurrentOperation(operation);
+                calculatorResponse.CalculatorState = _multipleTermOperationLogic.GetCalculatorState();
             }
-            calculatorResponse.LastTerm = _calculatorLogic.GetLastTerm();
-            calculatorResponse.Operation = _calculatorLogic.GetCurrentOperation();
-        }
+            calculatorResponse.LastTerm = _multipleTermOperationLogic.GetLastTerm();
+            calculatorResponse.Operation = _multipleTermOperationLogic.GetCurrentOperation();
 
-        private void ProcessOperationForSingleTerm(SingleTermOperationCalculatorResponse calculatorResponse, string strings)
-        {
-            var operation = Enum.Parse<Operation>(strings);
-            _calculatorLogic.SetCurrentOperation(operation);
-            calculatorResponse.CalculatorResult = _calculatorLogic.DoSingleTermOperation();
+            return calculatorResponse;
         }
 
         private void SetTheCalculatorStateIfExistsInRequest(MultipleTermOperationCalculatorRequest request)
         {
             if (request.CalculatorState != null)
             {
-                _calculatorLogic.SetState(request.CalculatorState);
+                _multipleTermOperationLogic.SetState(request.CalculatorState);
             }
         }
     }
 }
+
+
 
 

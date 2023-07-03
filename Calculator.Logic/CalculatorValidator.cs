@@ -8,9 +8,17 @@ namespace Calculator.Logic
 {
     public class CalculatorValidator : ICalculatorValidator
     {
-        public void ValidateOperation(Operation operation)
+        public void ValidateMultipleTermOperation(MultipleTermOperation operation)
         {
-            if (operation == Operation.None)                                
+            if (operation == MultipleTermOperation.None)                                
+            {
+                throw new CalculatorException(Error.None);
+            }
+        }
+
+        public void ValidateSingleTermOperation(SingleTermOperation operation)
+        {
+            if (operation == SingleTermOperation.None)
             {
                 throw new CalculatorException(Error.None);
             }

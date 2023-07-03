@@ -3,11 +3,9 @@ using Calculator.Domain.Response;
 
 namespace Calculator.Logic
 {
-    public interface ICalculatorLogic
+    public interface IMultipleTermOperationLogic
     {
         CalculatorResult DoMultipleTermOperation();
-
-        CalculatorResult DoSingleTermOperation();
 
         CalculatorState GetCalculatorState();
 
@@ -19,13 +17,13 @@ namespace Calculator.Logic
 
         void ResetTerms();
 
-        void SetCurrentOperation(Operation operation);
+        void SetCurrentOperation(MultipleTermOperation operation);
 
-        Operation GetCurrentOperation();
+        MultipleTermOperation GetCurrentOperation();
 
-        bool ShouldPerformOperationForCurrentTerms(Operation newOperation);
+        bool ShouldPerformOperationForCurrentTerms(MultipleTermOperation newOperation);
 
-        bool ShouldRepeatLastOperation(Operation newOperation);
+        bool ShouldRepeatLastOperation(MultipleTermOperation newOperation);
         string GetLastTerm();
     }
 }
