@@ -10,6 +10,13 @@ namespace Calculator.API.Controllers
     [ApiController]
     public class CalculatorController : ControllerBase
     {
+        private readonly ICalculatorService _calculatorService;
+
+        public CalculatorController(ICalculatorService calculatorService)
+        {
+            this._calculatorService = calculatorService;
+        }
+
         [HttpGet("MultipleTermOperation")]
         public ActionResult<MultipleTermOperationCalculatorResponse> GetMultipleTermResponse([FromQuery] MultipleTermOperationCalculatorRequest calculatorRequest)
         {
