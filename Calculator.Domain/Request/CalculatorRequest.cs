@@ -1,9 +1,14 @@
 ﻿
 namespace Calculator.Domain.Request
 {
-    public class CalculatorRequest
+    public class MultipleTermOperationCalculatorRequest
     {
-        public string ButtonClicked { get; set; }
+        public string CalculatorInput { get; set; }
         public CalculatorState CalculatorState { get; set; }
+    }
+
+        public class SingleTermOperationCalculatorRequest
+    {
+        public string CalculatorInput { get; set; }
     }
 }

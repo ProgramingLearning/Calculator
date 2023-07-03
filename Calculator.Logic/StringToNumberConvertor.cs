@@ -5,13 +5,13 @@ namespace Calculator.Logic
 {
     public class StringToNumberConvertor : IStringToNumberConvertor
     {
-        public T ReadTerm<T>(List<string> input)
+        public T ReadTerm<T>(string input)
         {
-            if (input.Count > 0)
+            if (string.IsNullOrEmpty(input))
             {
-                return (T)ConvertStringToType<T>(input[0]);
+                return default(T);
             }
-            return default(T);
+            return (T)ConvertStringToType<T>(input);
         }
 
         public List<T> ReadTerms<T>(List<string> input)
@@ -27,7 +27,7 @@ namespace Calculator.Logic
             }
             throw new CalculatorException(Error.NoTermSelected);
         }
-         
+
         private static object ConvertStringToType<T>(string valueToConvert)
         {
             if (typeof(T) == typeof(double))

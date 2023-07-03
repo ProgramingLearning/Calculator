@@ -8,7 +8,7 @@ namespace Calculator.Logic.Tests
     [TestClass]
     public class CalculatorErrorTests
     {
-        private Mock<ICalculatorLogic> _calculatorLogicMock;
+        private Mock<ISingleTermOperationLogic> _calculatorLogicMock;
         private Mock<ICalculatorValidator> _calculatorValidatorMock;
         private Mock<IStringToNumberConvertor> _stringToNumberConvertorMock;
         private CalculatorError _sut;
@@ -16,7 +16,7 @@ namespace Calculator.Logic.Tests
         [TestInitialize]
         public void Initialize()
         {
-            _calculatorLogicMock = new Mock<ICalculatorLogic>();
+            _calculatorLogicMock = new Mock<ISingleTermOperationLogic>();
             _calculatorValidatorMock = new Mock<ICalculatorValidator>();
             _stringToNumberConvertorMock = new Mock<IStringToNumberConvertor>();
 

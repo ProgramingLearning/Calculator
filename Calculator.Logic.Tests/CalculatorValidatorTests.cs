@@ -21,11 +21,11 @@ namespace Calculator.Logic.Tests
         public void ValidateOperation_WhenOperationIsNone_ThrowsCalculatorException()
         {
             //Arrange
-            var operation = Operation.None;
+            var operation = MultipleTermOperation.None;
 
             //Act
             //Assert
-            Assert.ThrowsException<CalculatorException>(() => _sut.ValidateOperation(operation));
+            Assert.ThrowsException<CalculatorException>(() => _sut.ValidateMultipleTermOperation(operation));
         }
 
         [TestMethod]

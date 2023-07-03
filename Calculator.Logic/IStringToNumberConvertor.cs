@@ -6,7 +6,7 @@ namespace Calculator.Logic
 {
     public interface IStringToNumberConvertor
     {
-         T ReadTerm<T>(List<string> input);
+         T ReadTerm<T>(string input);
          List<T> ReadTerms<T>(List<string> input);
     }
 }
